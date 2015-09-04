@@ -1,0 +1,59 @@
+{
+  "name": "squid-desktop",
+  "description": "Squid gives you a quick access to all your Github repositories.",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": "Squid Development Team",
+  "homepage": "https://github.com/squid-app/desktop",
+  "bugs": "https://github.com/squid-app/desktop/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/squid-app/desktop"
+  },
+  "keywords": [
+    "react",
+    "reflux",
+    "github api",
+    "node-webkit",
+    "nw.js",
+    "osx",
+    "ios"
+  ],
+  "main": "index.html",
+  "single-instance": true,
+  "dependencies": {
+    "squid-core": "0.1.0",
+  },
+  "devDependencies": {
+    "babel": "^5.0.9",
+    "babelify": "^6.0.2",
+    "body-parser": "^1.12.3",
+    "browser-sync": "^2.5.3",
+    "browserify": "^9.0.7",
+    "chai": "^3.2.0",
+    "del": "^1.1.1",
+    "gulp": "^3.8.11",
+    "gulp-autoprefixer": "^2.1.0",
+    "gulp-concat": "^2.2.0",
+    "gulp-load-plugins": "^0.9.0",
+    "gulp-plumber": "^1.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace-task": "^0.10.1",
+    "gulp-sass": "^0.7.1",
+    "gulp-sourcemaps": "^1.5.0",
+    "gulp-util": "^3.0.4",
+    "gulp-watch": "^4.1.1",
+    "mocha": "^2.3.0",
+    "morgan": "^1.5.2",
+    "node-bourbon": "1.2.3",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.1.0",
+    "yargs": "^3.11.0",
+    "nw": "^0.12.1"
+  },
+  "scripts": {
+    "start": "nw ./build",
+    "test": "make test"
+  }
+}
