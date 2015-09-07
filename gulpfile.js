@@ -5,6 +5,7 @@ var buildFolder  = './build/'
   , source       = require('vinyl-source-stream')
   , browserify   = require('browserify')
   , reactify     = require('reactify')
+  , replace      = require('gulp-replace-task')
   , gutil        = require('gulp-util')
   , sass         = require('gulp-sass')
   , sourcemaps   = require('gulp-sourcemaps')
@@ -38,8 +39,21 @@ gulp.task('build:clean', function()
 
 gulp.task('build:version', ['build:clean'], function ()
 {
-  return string_src( 'VERSION', pkg.version)
-            .pipe( gulp.dest( buildFolder ) )
+  gulp.task('default', function ()
+  {
+    gulp.src('./osx/Info.plist')
+      .pipe(replace({
+        patterns: [
+          {
+            match: 'version',
+            replacement: pkg.version
+          }
+        ]
+      }))
+      .pipe( gulp.dest( buildFolder ) )
+  })
+  // return string_src( 'VERSION', pkg.version)
+  //           .pipe( gulp.dest( buildFolder ) )
 })
 
 gulp.task('build:package', ['build:clean'], function ()
@@ -125,26 +139,20 @@ gulp.task('watch', function()
   ])
 })
 
-gulp.task('default', [
+var tasks = [
     'build:clean'
   , 'build:version'
   , 'build:package'
   , 'build:modules'
   , 'move'
-  , 'sass'
-  , 'browserify'
-  , 'watch'
-])
+  // , 'sass'
+  // , 'browserify'
+  // , 'watch'
+]
 
-gulp.task('build', [
-    'build:clean'
-  , 'build:version'
-  , 'build:package'
-  , 'build:modules'
-  , 'move'
-  , 'sass'
-  , 'browserify'
-])
+gulp.task('default', tasks ) //.concat( ['watch'] ) )
+
+gulp.task('build', tasks )
 
 
 

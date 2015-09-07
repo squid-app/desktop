@@ -20,7 +20,8 @@
     "ios"
   ],
   "dependencies": {
-    "squid-core": "0.1.0"
+    "squid-core": "0.1.0",
+    "react": "^0.13.1"
   },
   "devDependencies": {
     "browserify": "^9.0.7",
@@ -45,7 +46,8 @@
     "yargs": "^3.11.0"
   },
   "scripts": {
-    "start": "nw ./build"
+    "start": "nw ./build",
+    "build": "./scripts/build.sh"
   },
   "browserify": {
     "transform": [
