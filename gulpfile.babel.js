@@ -1,6 +1,7 @@
 var buildFolder  = './build/'
   , environment  = 'dev'
   , gulp         = require('gulp')
+  , $            = require('gulp-load-plugins')()
   , del          = require('del')
   , source       = require('vinyl-source-stream')
   , browserify   = require('browserify')
@@ -19,6 +20,16 @@ var buildFolder  = './build/'
 if( gutil.env.prod === true )
   environment = 'prod'
 
+let watching = false;
+
+gulp.on("stop", () => {
+    if (!watching) {
+        process.nextTick(() => process.exit(0));
+    }
+});
+// Helpers
+// ---------------
+
 function string_src(filename, string)
 {
   var src = require('stream').Readable({ objectMode: true })
@@ -32,28 +43,55 @@ function string_src(filename, string)
   return src
 }
 
+function notify(message)
+{
+  return $.notify({
+      title: "Squid Desktop Watcher"
+    , message: message
+    , onLast: true
+  })
+}
+
+function onError(err)
+{
+  return $.notify.onError(() => {
+      $.util.beep();
+      $.util.log(err.toString());
+      if (err.stack) {
+          $.util.log("Stack trace", err.stack.toString());
+      }
+      this.emit("end");
+      return "Error: <%= error.message %>";
+  })(err);
+}
+
+// Tasks
+// ---------------
+
+gulp.task('test', function()
+{
+  gulp.src('./package.json')
+    .pipe(notify("hello world"))
+})
+
 gulp.task('build:clean', function()
 {
-  return del(['build/*'])
+  return del( ['build/*'] )
 })
 
 gulp.task('build:version', ['build:clean'], function ()
 {
-  gulp.task('default', function ()
-  {
-    gulp.src('./osx/Info.plist')
-      .pipe(replace({
-        patterns: [
-          {
-            match: 'version',
-            replacement: pkg.version
-          }
-        ]
-      }))
-      .pipe( gulp.dest( buildFolder ) )
-  })
-  // return string_src( 'VERSION', pkg.version)
-  //           .pipe( gulp.dest( buildFolder ) )
+  gulp.src('./osx/Info.plist')
+    .pipe(replace({
+      patterns: [
+        {
+          match: 'version',
+          replacement: pkg.version
+        }
+      ]
+    }))
+    .pipe( gulp.dest( './release' ) )
+    .pipe( notify('Write Info.plist file') )
 })
 
 gulp.task('build:package', ['build:clean'], function ()
@@ -77,6 +115,7 @@ gulp.task('build:package', ['build:clean'], function ()
 
   return string_src( 'package.json', json)
             .pipe( gulp.dest( buildFolder ) )
+            .pipe( notify('Write package.json') )
 })
 
 gulp.task('build:modules', ['build:package'], function ()
@@ -95,7 +134,7 @@ gulp.task('sass', function ()
     .pipe( sourcemaps.init() )
     .pipe( sass({
       includePaths: require('node-bourbon').includePaths
-    }) )
+    }).on('error', onError) )
     .pipe(sourcemaps.write())
     .pipe(autoprefixer(
     {
@@ -103,17 +142,28 @@ gulp.task('sass', function ()
       , cascade: false
     }))
     .pipe( gulp.dest( buildFolder ) )
+    .pipe( notify('Sass files has been compiled') )
 })
 
-gulp.task('move', function()
+gulp.task('move', ['build:clean'], function()
 {
   gulp
     .src([
         './src/html/*'
       , './src/img/*'
+      , './config'
       , './scripts/updater.js'
     ])
     .pipe( gulp.dest( buildFolder ) )
+
+  gulp
+    .src([
+       './config/**/*'
+    ])
+    .pipe( gulp.dest( buildFolder + '/config' ) )
+
+  gulp.src('./package.json')
+    .pipe( notify('Moved source to build folder') )
 })
 
 
@@ -124,7 +174,11 @@ gulp.task('browserify', function ()
     .bundle()
     .pipe( source('squid.js') )
     .pipe( gulp.dest( buildFolder ) )
+    .pipe( notify('Javascript files has been compiled') )
 })
+
+// Commands
+// ---------------
 
 gulp.task('watch', function()
 {
@@ -143,11 +197,11 @@ var tasks = [
     'build:clean'
   , 'build:version'
   , 'build:package'
-  , 'build:modules'
+  // , 'build:modules'
   , 'move'
-  // , 'sass'
+  , 'sass'
   // , 'browserify'
-  // , 'watch'
+  , 'watch'
 ]
 
 gulp.task('default', tasks ) //.concat( ['watch'] ) )
