@@ -20,9 +20,10 @@
     "ios"
   ],
   "dependencies": {
+    "pubsub-js": "^1.5.2",
+    "react": "^0.13.1",
     "squid-config": "^0.2.0",
-    "squid-core": "^0.1.0",
-    "react": "^0.13.1"
+    "squid-core": "^0.1.0"
   },
   "devDependencies": {
     "babel": "5.8.23",
