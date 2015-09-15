@@ -5,7 +5,7 @@ Squid is a small cool tool that give you a quick access to all your Github repos
 
 #### Dependencies
 
-* [Squid Core](https://github.com/squid-app/core)
+* [Squid Core](https://github.com/squid-app/core) and his dependencies.
 * [nw.js](http://nwjs.io/)
 
 All data are served by the [Github API](https://developer.github.com/v3/).
@@ -21,28 +21,36 @@ All data are served by the [Github API](https://developer.github.com/v3/).
 * [Troubleshoots](#troubleshoots)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
+* [Release History](CHANGELOG.md)
 
 
 ## Installation
 
-First install Node.js packages:
+First install required packages:
 
 	$ npm install
 	
-Run Gulp command:
+Than run Gulp command to build source and start `watch` task:
 
-	$ gulp
-		
-Into a new terminal window run:
+	$ gulp init
+	
+`watch` task will automaticly update application's build when you change one of the following files:
+
+* `src/html/*`
+* `src/img/*`
+* `config/*`
+* `scripts/updater.js`
+	
+Now you are ready to launch Squid. Go ahead and run into a new terminal window:
 
 	$ npm start
 		
 	
 ## Build app
 
-Run these command
+To build a standalone app and his installer run these command:
 
-	sh build.sh
+	$ gulp build
 	
 The freshly builded app will be available into the `release` folder.
 
@@ -68,9 +76,3 @@ See the [roadmap](https://github.com/squid-app/desktop/milestones) future develo
 
 In lieu of a formal styleguide, take care to maintain the existing coding style.
 Add unit tests for any new or changed functionality. Lint and test your code.
-
-## Release History
-
-All notable changes to this project will be documented here.
-
-##### [Unreleased][unreleased]
