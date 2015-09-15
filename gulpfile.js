@@ -1,20 +1,22 @@
-var buildFolder  = './build/'
-  , environment  = 'dev'
-  , gulp         = require('gulp')
-  , del          = require('del')
-  , source       = require('vinyl-source-stream')
-  , browserify   = require('browserify')
-  , reactify     = require('reactify')
-  , replace      = require('gulp-replace-task')
-  , gutil        = require('gulp-util')
-  , sass         = require('gulp-sass')
-  , sourcemaps   = require('gulp-sourcemaps')
-  , autoprefixer = require('gulp-autoprefixer')
-  , concat       = require('gulp-concat')
-  , argv         = require('yargs').argv
-  , pkg          = require('./package.json')
-  , exec         = require('child_process').exec
-  , _            = require('lodash')
+var buildFolder   = './build/'
+  , releaseFolder = './release/'
+  , environment   = 'dev'
+  , gulp          = require('gulp')
+  , del           = require('del')
+  , source        = require('vinyl-source-stream')
+  , browserify    = require('browserify')
+  , reactify      = require('reactify')
+  , replace       = require('gulp-replace-task')
+  , sequence      = require('run-sequence')
+  , gutil         = require('gulp-util')
+  , sass          = require('gulp-sass')
+  , sourcemaps    = require('gulp-sourcemaps')
+  , autoprefixer  = require('gulp-autoprefixer')
+  , concat        = require('gulp-concat')
+  , argv          = require('yargs').argv
+  , pkg           = require('./package.json')
+  , exec          = require('child_process').exec
+  , _             = require('lodash')
 
 if( gutil.env.prod === true )
   environment = 'prod'
@@ -43,21 +45,26 @@ gulp.task('build:clean', function()
   return del( ['./build/*'] )
 })
 
-gulp.task('build:version', ['build:clean'], function ()
+gulp.task('build:newrelease', function()
 {
-  gulp.src('./osx/Info.plist')
-    .pipe(replace({
-      patterns: [
-        {
-          match: 'version',
-          replacement: pkg.version
-        }
-      ]
-    }))
-    .pipe( gulp.dest( './release' ) )
+  return del( ['./build/*'] )
 })
 
-gulp.task('build:package', ['build:clean'], function ()
+gulp.task('build:version', function ()
+{
+  return gulp.src('./osx/Info.plist')
+      .pipe(replace({
+        patterns: [
+          {
+            match: 'version',
+            replacement: pkg.version
+          }
+        ]
+      }))
+      .pipe( gulp.dest( releaseFolder ) )
+})
+
+gulp.task('build:package', function ()
 {
   var config = require('./config/squid.json').default
 
@@ -80,13 +87,11 @@ gulp.task('build:package', ['build:clean'], function ()
             .pipe( gulp.dest( buildFolder ) )
 })
 
-gulp.task('build:modules', ['build:package'], function ()
+gulp.task('build:modules', function ()
 {
-  exec('npm install --prefix ./build --production', function (err, stdout, stderr)
-  {
-    console.log(stdout)
-    console.log(stderr)
-  })
+  console.log('install package dependencies')
+
+  exec('npm install --prefix ./build --production', function (err, stdout, stderr){})
 })
 
 // Compile Sass
@@ -107,7 +112,7 @@ gulp.task('sass', function ()
     .pipe( gulp.dest( buildFolder ) )
 })
 
-gulp.task('move', ['build:package'], function()
+gulp.task('move', function()
 {
   gulp
     .src([
@@ -138,12 +143,25 @@ gulp.task('browserify', function ()
 // Commands
 // ---------------
 
+gulp.task('init', function()
+{
+  sequence(
+      'build:clean'
+    , 'build:package'
+    , 'build:modules'
+    , 'move'
+    , ['sass'] // , 'browserify'
+    , 'watch'
+    , function(){} )
+})
+
 gulp.task('watch', function()
 {
   gulp.watch( [
       './src/scss/**/*.scss'
     , './src/js/**/*.js'
     , './src/scripts/updater.js'
+    , './config/**/*.js'
   ], [
       'sass'
     // , 'browserify'
@@ -151,20 +169,26 @@ gulp.task('watch', function()
   ])
 })
 
-var tasks = [
-    'build:clean'
-  , 'build:version'
-  , 'build:package'
-  , 'build:modules'
-  , 'move'
-  , 'sass'
-  // , 'browserify'
-  , 'watch'
-]
+gulp.task('build', function()
+{
+  sequence(
+      'build:clean'
+    , 'build:newrelease'
+    , 'build:version'
+    , 'build:package'
+    , 'build:modules'
+    , 'move'
+    , ['sass'] // , 'browserify'
+    , function()
+      {
+        console.log('start build script')
 
-gulp.task('default', tasks.concat( ['watch'] ) )
-
-gulp.task('build', tasks )
+        exec('./scripts/build.sh', function (err, stdout, stderr)
+        {
+          console.log('build done')
+        })
+      })
+})
 
 
 
