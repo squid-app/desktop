@@ -4,12 +4,15 @@
 module.exports = {
     updater:
     {
-      source:
+      dmg_name: 'Squid Installer'
+    , app_name: 'Squid'
+    , source:
       {
           host: 'getsquiddone.com'
         , path: '/download/squid-lastest.dmg'
+        , port: 80
       }
-    }
+  }
   , window:
     {
         title:       'Squid'
