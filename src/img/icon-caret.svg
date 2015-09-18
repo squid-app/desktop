@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="10px" height="7px" viewBox="0 0 10 7" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12081) - http://www.bohemiancoding.com/sketch -->
+    <title>Rectangle 11 Copy 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="-1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="0.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.7 0" in="shadowBlurOuter1" type="matrix" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Artboard-1-Copy-9" sketch:type="MSArtboardGroup" transform="translate(-894.000000, -505.000000)" filter="url(#filter-1)" fill="#71797F">
+            <g id="Rectangle-11-+-Rectangle-11-Copy-31" sketch:type="MSLayerGroup" transform="translate(891.000000, 499.000000)">
+                <path d="M8.03222656,6.19493303 C7.76773657,6.18599104 7.50154825,6.28251547 7.30039074,6.48367298 L4.4589217,9.32514202 C4.07722348,9.70684024 4.07491836,10.3423103 4.46544266,10.7328346 C4.85868961,11.1260816 5.48621239,11.1262785 5.87313526,10.7393556 L8.03222656,8.58026428 L10.1913179,10.7393556 C10.5782407,11.1262785 11.2057635,11.1260816 11.5990105,10.7328346 C11.9895348,10.3423103 11.9872296,9.70684024 11.6055314,9.32514202 L8.76406238,6.48367298 C8.56290487,6.28251547 8.29671655,6.18599104 8.03222656,6.19493303 Z" id="Rectangle-11-Copy-2" sketch:type="MSShapeGroup" transform="translate(8.032227, 8.611514) scale(1, -1) translate(-8.032227, -8.611514) "></path>
+            </g>
+        </g>
+    </g>
+</svg>

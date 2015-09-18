@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="17px" height="12px" viewBox="0 0 17 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12081) - http://www.bohemiancoding.com/sketch -->
+    <title>Rectangle 355 + Path Copy + Triangle 1</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Artboard-1-Copy-9" sketch:type="MSArtboardGroup" transform="translate(-769.000000, -54.000000)">
+            <g id="Rectangle-355-+-Path-Copy-+-Triangle-1" sketch:type="MSLayerGroup" transform="translate(769.000000, 54.000000)">
+                <path d="M0.633253455,6.63094866 C0.283517229,6.20093704 0.290432945,5.51240106 0.653662682,5.08725201 L4.34633732,0.765091742 C4.70734525,0.342543241 5.45576096,0 6.00247329,0 L15.9975267,0 C16.5511774,0 17,0.455760956 17,1.00247329 L17,10.9975267 C17,11.5511774 16.544239,12 15.9975267,12 L6.00247329,12 C5.44882258,12 4.71685231,11.6518611 4.36674654,11.2213951 L0.633253455,6.63094866 Z" id="Rectangle-355" fill="#D8D8D8" sketch:type="MSShapeGroup"></path>
+                <rect id="Path-Copy" fill="#FFFFFF" sketch:type="MSShapeGroup" x="6" y="5" width="8" height="2" rx="4"></rect>
+                <path d="M8.20015401,3.5998845 C8.64189675,3.26857744 9,3.45097518 9,3.99077797 L9,8.00922203 C9,8.55641359 8.64502668,8.73377001 8.20015401,8.4001155 L5.79984599,6.5998845 C5.35810325,6.26857744 5.35497332,5.73377001 5.79984599,5.4001155 L8.20015401,3.5998845 Z" id="Triangle-1" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
+            </g>
+        </g>
+    </g>
+</svg>

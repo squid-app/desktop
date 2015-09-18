@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12081) - http://www.bohemiancoding.com/sketch -->
+    <title>Rectangle 812 + Oval 132</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Artboard-1-Copy-9" sketch:type="MSArtboardGroup" transform="translate(-537.000000, -803.000000)">
+            <g id="Rectangle-812-+-Oval-132" sketch:type="MSLayerGroup" transform="translate(538.000000, 802.000000)">
+                <path d="M1.34701326,5.64252959 C1.34405904,4.53469712 2.2314681,3.64574765 3.34043632,3.65712169 L8.95408345,3.71469755 C9.50937518,3.72039285 10.2768357,4.04231741 10.6638985,4.42938025 L12.5889815,6.35446328 C13.3700853,7.13556702 13.3713453,8.40072643 12.5832901,9.18878159 L10.7732054,10.9988663 C10.3848432,11.3872284 9.62629978,11.71332 9.07129567,11.7274064 L3.36115139,11.8723339 C2.25802328,11.900332 1.36139649,11.0362383 1.35841217,9.91712092 L1.34701326,5.64252959 Z" id="Rectangle-812" stroke="#1A4F6B" stroke-width="2" fill="#FFFFFF" sketch:type="MSShapeGroup" transform="translate(7.260789, 7.765005) rotate(-45.000000) translate(-7.260789, -7.765005) "></path>
+                <circle id="Oval-132" fill="#1A4F6C" sketch:type="MSShapeGroup" cx="9" cy="6" r="1"></circle>
+            </g>
+        </g>
+    </g>
+</svg>
