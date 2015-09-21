@@ -1,0 +1,81 @@
+
+//
+// Variables
+// --------------------------------------------------
+
+//== Scaffolding
+//
+//## Settings for some of the most global styles.
+
+$border-radius-base:   4px;
+$border-radius-window: 6px;
+$border-radius-small:  2px;
+
+$chrome-min-height: 44px;
+
+//== Transitions
+//
+
+$ease: cubic-bezier(0, 0.79, 0.38, 0.96);
+
+@mixin pane-transition( $duration: 800ms, $property: all ) {
+    transition: $property $duration $ease;
+}
+
+
+//== zIndex
+//
+
+$z-chrome:            1000;
+$z-issue:             900;
+$z-list:              800;
+
+//== Colors
+//
+$color-title:            #212121;
+$color-text:             #828a95;
+
+$color-label:            #4a4a4a;
+$color-label-bkgd:       #ecf0f5;
+
+$color-highlight:        #ecfbff;
+$color-highlight-bkgd:   #c7eaf3;
+$color-highlight-border: #b9f0ff;
+$color-highlight-text:   #1a4f6c;
+
+$color-border:           #c1c1c1;
+$color-border-light:     #f1f1f1;
+$color-border-issue:     #e6e6e6;
+
+$color-icon:             #71797f;
+
+
+//== Typography
+//
+//## Font, line-height, and color for body text, headings, and more.
+
+$font-family-text-regular:            'SquidSFUITextRegular', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-family-text-semibold:           'SquidSFUITextSemibold', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+$font-family-display-regular:         'SquidSFUIDisplayRegular', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-family-display-bold:            'SquidSFUIDisplayBold', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-family-display-medium:          'SquidSFUIDisplayMedium', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-family-display-semibold:        'SquidSFUIDisplaySemibold', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+$font-family-compactdisplay-regular:  'SquidSFCompactDisplayRegular', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-family-compactdisplay-semibold: 'SquidSFCompactDisplaySemibold', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+$font-family-base:                     $font-family-text-regular;
+
+
+$font-size-small:         12px;
+$font-size-base:          14px;
+$font-size-large:         16px;
+$font-size-extra:         18px;
+$font-size-giant:         24px;
+
+//== Paths
+//
+$img-path: '../img/';
+$font-path: '../fonts/';
+

@@ -1,0 +1,56 @@
+
+.c-avatar {
+  border-radius: 50%;
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+
+  img {
+    display: block;
+    width: 100%;
+    position: relative;
+    z-index: 100;
+  }
+}
+
+.c-avatar--small {
+  height: 16px;
+  width: 16px;
+}
+.c-avatar--large {
+  height: 24px;
+  width: 24px;
+}
+
+.c-avatar--user {
+  span {
+    border: 2px solid $color-text;
+    border-radius: 50%;
+    display: block;
+    height: 100%;
+    position: relative;
+    width: 100%;
+    z-index: -1
+  }
+
+  &:before,
+  &:after {
+    border: 2px solid $color-text;
+    border-radius: 50%;
+    content: '';
+    position: absolute;
+  }
+
+  &:before {
+    height: 8px;
+    width: 12px;
+    top: 10px;
+    left: 2px;
+  }
+  &:after {
+    height: 7px;
+    width: 6px;
+    top: 4px;
+    left: 5px;
+  }
+}

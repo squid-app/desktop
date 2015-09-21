@@ -1,0 +1,25 @@
+
+$btn-action-bkgd: unquote('linear-gradient(-180deg, #fff 0%, #f9f9f9 100%)');
+
+.c-btn-action {
+  background-image: #{$btn-action-bkgd};
+  border-radius: 50%;
+  box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.20), 0px 0px 0px 1px rgba(0,0,0,0.10);
+  display: inline-block;
+  flex-basis: 24px;
+  height: 24px;
+}
+
+$btn-submit-bkgd: unquote('linear-gradient(0deg, #1facdc 0%, #61bedd 100%)');
+
+.c-btn-submit {
+  background: #{$btn-submit-bkgd};
+  border: 1px solid #2ca6d1;
+  border-radius: $border-radius-base;
+  color: #fff;
+  display: inline-block;
+  height: 24px;
+  padding: 0 10px;
+
+  &[readonly] { opacity: .3 }
+}

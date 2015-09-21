@@ -1,0 +1,21 @@
+
+.ff-regular { font-family: $font-family-text-regular }
+.ff-highlight { font-family: $font-family-text-semibold }
+
+.ff-label { font-family: $font-family-display-medium }
+.ff-action { font-family: $font-family-display-semibold }
+.ff-text { font-family: $font-family-display-regular }
+.ff-tag { font-family: $font-family-display-bold }
+
+.ff-actor { font-family: $font-family-compactdisplay-semibold }
+.ff-context { font-family: $font-family-compactdisplay-regular }
+
+.fs-base { font-size: $font-size-base }
+.fs-extra { font-size: $font-size-extra; line-height: 24px }
+.fs-large { font-size: $font-size-large }
+.fs-small { font-size: $font-size-small }
+.fs-giant { font-size: $font-size-giant }
+
+.co-title { color: $color-title }
+.co-text { color: $color-text }
+.co-label { color: $color-label }

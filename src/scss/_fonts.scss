@@ -1,0 +1,84 @@
+// .woff: Modern Browsers
+// .ttf: Safari, Android, iOS
+
+// SF UI Text
+// -------------------
+
+  // Regular
+@font-face {
+  font-family: 'SquidSFUITextRegular';
+  src: url('#{$font-path}SF-UI-Text-Regular.woff') format('woff'),
+       url('#{$font-path}SF-UI-Text-Regular.ttf')  format('truetype');
+  font-style:   normal;
+  font-weight:  400;
+}
+
+  // Semibold
+@font-face {
+  font-family: 'SquidSFUITextSemibold';
+  src: url('#{$font-path}SF-UI-Text-Semibold.woff') format('woff'),
+       url('#{$font-path}SF-UI-Text-Semibold.ttf')  format('truetype');
+  font-style:   normal;
+  font-weight:  700;
+}
+
+// SF UI Display
+// -------------------
+
+  // Regular
+@font-face {
+  font-family: 'SquidSFUIDisplayRegular';
+  src: url('#{$font-path}SF-UI-Display-Regular.woff') format('woff'),
+       url('#{$font-path}SF-UI-Display-Regular.ttf')  format('truetype');
+  font-style:   normal;
+  font-weight:  400;
+}
+
+  // Bold
+@font-face {
+  font-family: 'SquidSFUIDisplayBold';
+  src: url('#{$font-path}SF-UI-Display-Bold.woff') format('woff'),
+       url('#{$font-path}SF-UI-Display-Bold.ttf')  format('truetype');
+  font-style:   normal;
+  font-weight:  700;
+}
+
+  // Medium
+@font-face {
+  font-family: 'SquidSFUIDisplayMedium';
+  src: url('#{$font-path}SF-UI-Display-Medium.woff') format('woff'), /* Modern Browsers */
+       url('#{$font-path}SF-UI-Display-Medium.ttf')  format('truetype');
+  font-style:   normal;
+  font-weight:  400;
+}
+
+  // Semibold
+@font-face {
+  font-family: 'SquidSFUIDisplaySemibold';
+  src: url('#{$font-path}SF-UI-Display-Semibold.woff') format('woff'),
+       url('#{$font-path}SF-UI-Display-Semibold.ttf')  format('truetype');
+  font-style:   normal;
+  font-weight:  700;
+}
+
+// SF Compact Display
+// -------------------
+
+  // Regular
+@font-face {
+  font-family: 'SquidSFCompactDisplayRegular';
+  src: url('#{$font-path}SF-Compact-Display-Regular.woff') format('woff'),
+       url('#{$font-path}SF-Compact-Display-Regular.ttf')  format('truetype');
+  font-style:   normal;
+  font-weight:  400;
+}
+
+  // Semibold
+@font-face {
+  font-family: 'SquidSFCompactDisplaySemibold';
+  src: url('#{$font-path}SF-Compact-Display-Semibold.woff') format('woff'),
+       url('#{$font-path}SF-Compact-Display-Semibold.ttf')  format('truetype');
+  font-style:   normal;
+  font-weight:  700;
+}
+

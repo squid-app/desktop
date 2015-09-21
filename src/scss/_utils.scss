@@ -1,0 +1,101 @@
+
+// Borders
+// --------------------------------------------------
+
+// border less
+.u-br-l { border:none !important; }
+
+// Clear
+// --------------------------------------------------
+
+.u-cb { clear:both !important;  }
+.u-cl { clear:left !important;  }
+.u-cr { clear:right !important; }
+.u-cf { @include clearfix }
+
+// Display
+// --------------------------------------------------
+
+.u-db  { display:block !important; }
+.u-dn  { display:none !important;  }
+.u-di  { display:inline !important; }
+.u-dib { display: inline-block !important; }
+
+.visible { visibility:visible !important; }
+.hidden { visibility:hidden !important; }
+
+// Float
+// --------------------------------------------------
+
+.u-fl { float: left !important; }
+.u-fr { float: right !important; }
+.u-fn { float: none !important; }
+
+// float fixer
+.u-ff {
+  overflow:hidden;
+  width:100%;
+}
+
+// Font style
+// --------------------------------------------------
+
+.u-strong { font-weight: bold !important; }
+.u-italic { font-style:  italic !important; }
+.u-normal { font-weight: normal !important; }
+
+.u-uppercase  { text-transform:uppercase !important; }
+.u-lowercase  { text-transform:lowercase !important; }
+.u-capitalize { text-transform:capitalize !important; }
+
+.u-deco-none      { text-decoration:none !important; }
+.u-deco-underline { text-decoration: underline !important; }
+
+.u-tr { text-align:right !important; }
+.u-tl { text-align:left !important; }
+.u-tc { text-align:center !important; }
+.u-tj { text-align:justify !important; }
+
+.u-word-wrap {
+  word-wrap: break-word;
+  overflow-wrap:break-word;
+}
+
+
+// Ellipse
+// ----------------------------------------------
+
+.u-ellipse {
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+
+
+// Position
+// --------------------------------------------------
+
+.u-pa { position: absolute !important; }
+.u-pr { position:relative !important; }
+
+// Cursor
+// ---------------------------------------------------
+
+.u-cp { cursor: pointer !important; }
+.u-cd { cursor: default !important; }
+
+// Align
+// ---------------------------------------------------
+
+  // horizontal align
+.u-ha {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+  // vertical align
+.u-va {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

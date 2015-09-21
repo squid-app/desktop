@@ -1,7 +1,9 @@
 var buildFolder   = './build/'
+  , assetsFolder  = buildFolder + 'assets/'
   , releaseFolder = './release/'
   , environment   = 'dev'
   , gulp          = require('gulp')
+  , plumber       = require('gulp-plumber')
   , del           = require('del')
   , source        = require('vinyl-source-stream')
   , browserify    = require('browserify')
@@ -20,6 +22,13 @@ var buildFolder   = './build/'
 
 if( gutil.env.prod === true )
   environment = 'prod'
+
+
+// Gulp plumber error handler
+var onError = function(err) {
+  console.log(err);
+}
+
 
 // Helpers
 // ---------------
@@ -66,11 +75,11 @@ gulp.task('build:version', function ()
 
 gulp.task('build:package', function ()
 {
-  var config = require('./config/squid.json').default
+  var config = require('./config/desktop')
 
   if( environment !== 'prod' )
   {
-    var devConfig = require('./config/default.json').dev
+    var devConfig = require('./config/dev')
     config = _.merge( config, devConfig )
   }
 
@@ -98,6 +107,9 @@ gulp.task('build:modules', function ()
 gulp.task('sass', function ()
 {
   gulp.src('./src/scss/squid.scss')
+    .pipe(plumber({
+      errorHandler: onError
+    }))
     .pipe( sourcemaps.init() )
     .pipe( sass({
         includePaths: require('node-bourbon').includePaths
@@ -109,24 +121,25 @@ gulp.task('sass', function ()
         browsers: ['last 2 versions']
       , cascade: false
     }))
-    .pipe( gulp.dest( buildFolder ) )
+    .pipe( gulp.dest( assetsFolder + 'css' ) )
 })
 
 gulp.task('move', function()
 {
   gulp
-    .src([
-        './src/html/*'
-      , './src/img/*'
-      , './config'
-      , './scripts/updater.js'
-    ])
+    .src(['./src/html/*'])
     .pipe( gulp.dest( buildFolder ) )
 
   gulp
-    .src([
-       './config/**/*'
-    ])
+    .src(['./src/img/**/*'])
+    .pipe( gulp.dest( assetsFolder + 'img' ) )
+
+  gulp
+    .src([ './src/fonts/**/*' ])
+    .pipe( gulp.dest( assetsFolder + 'fonts' ) )
+
+  gulp
+    .src([ './config/**/*' ])
     .pipe( gulp.dest( buildFolder + '/config' ) )
 })
 
@@ -158,10 +171,10 @@ gulp.task('init', function()
 gulp.task('watch', function()
 {
   gulp.watch( [
-      './src/scss/**/*.scss'
-    , './src/js/**/*.js'
-    , './src/scripts/updater.js'
-    , './config/**/*.js'
+      './src/scss/**'
+    , './src/js/**'
+    , './src/html/*'
+    , './config/*'
   ], [
       'sass'
     // , 'browserify'

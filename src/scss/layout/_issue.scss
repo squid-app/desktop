@@ -1,0 +1,306 @@
+
+.l-issue {
+  @include position( absolute, $chrome-min-height 0 $chrome-min-height 0);
+  background: rgba( $color-title, 0);
+  overflow: hidden;
+  pointer-events: none;
+  transition: background 400ms $ease;
+  z-index: $z-issue;
+
+  &.selected {
+    background: rgba( $color-title, .1);
+    pointer-events: auto
+  }
+
+  &.displayed {
+    .l-issue__inner {
+      transform: translateX(0);
+      transition-delay: 100ms;
+    }
+  }
+}
+
+.l-issue__inner {
+  @include position( absolute, 0 0 0 0);
+  background: #fff;
+  box-shadow: -2px 0px 3px 0px rgba(0,0,0,0.08);
+  margin-left: 8px;
+  min-height: 100%;
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform 400ms $ease;
+}
+
+.l-issue__data {
+  border-bottom: 1px solid $color-border-issue;
+  padding: 12px
+}
+
+// Issue labels
+// -----------------
+
+.l-issue__labels {
+  margin: 20px 0 10px;
+
+  li {
+    border-radius: $border-radius-small;
+    color: #fff;
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    margin-bottom: 10px;
+    margin-left: 6px;
+    padding: 0 8px;
+    text-transform: uppercase
+  }
+}
+
+// Tabs
+// -----------------
+
+.l-issue__tabs {
+  & [role='tablist'] {
+    border-bottom: 1px solid $color-border-issue;
+    height: 45px;
+    font-size: 0;
+  }
+
+  & [role='tab'] {
+    color: #b6bbc1;
+    display: inline-block;
+    height: 45px;
+    font-family: $font-family-display-semibold;
+    font-size: $font-size-small;
+    line-height: 45px;
+    position: relative;
+    text-align: center;
+    width: 50%;
+  }
+
+  & [role='tab'] + [role='tab'] {
+    &:before {
+      background: $color-border-issue;
+      content: '';
+      height: 15px;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1px;
+    }
+  }
+
+  & [selected] { color: $color-label }
+  // & [selected],
+  // & li:hover { color: $color-label }
+
+  & [selected] {
+    &:after {
+      background: #31d4ff;
+      bottom: 0;
+      content: '';
+      display: block;
+      height: 3px;
+      left: 0;
+      position: absolute;
+      width: 100%;
+    }
+  }
+}
+
+// Comments
+// -----------------
+
+.l-issue__comments { padding: 30px 15px }
+
+.l-issue__comment + .l-issue__comment { margin-top: 30px }
+
+.l-issue__comment__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  & > div {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .c-avatar { margin-right: 10px }
+  .c-user__name { max-width: 200px }
+}
+
+.l-issue__comment__date { font-size: 10px }
+
+.l-issue__comment__message {
+  margin-top: -5px;
+  padding: 0 0 0 34px;
+
+
+  hr {
+    background: $color-border-issue;
+    border: none;
+    display: block;
+    height: 1px;
+    margin: 10px 0
+  }
+
+  p { line-height: $font-size-extra }
+  p + p,
+  p + pre,
+  pre + p { margin-top: 15px }
+
+  pre {
+    background-color: #f7f7f7;
+    border-radius: 3px;
+    display: block;
+    font-size: 85%;
+    line-height: 1.45;
+    max-height: 300px;
+    overflow: scroll;
+    padding: 16px;
+    word-wrap: normal;
+    width: 100%
+  }
+
+  code {
+    display: block;
+    font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    font-size: 11px;
+  }
+}
+
+// Add new Comment
+// -----------------
+
+.l-issue__add-comment {
+  display: flex;
+  padding: 0 10px 5px;
+
+  .c-avatar {
+    margin-right: 10px;
+    margin-top: 8px
+  }
+
+  textarea {
+    border: 1px solid $color-border-issue;
+    border-radius: $border-radius-window;
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-height: 20px;
+    padding: 10px 13px 0;
+    resize: none;
+    outline: none;
+  }
+}
+
+.l-issue__add-comment__attach {
+  color: $color-text;
+  font-size: 8px;
+  padding: 0 10px 30px 45px;
+  text-align: right;
+}
+
+// New Issue form
+// -----------------
+
+.l-new-issue { height: 100% }
+
+.l-new-issue__form {
+  display: flex;
+  flex-direction: column;
+  margin-top: $chrome-min-height;
+
+  textarea {
+    @include placeholder { color: $color-text }
+    border: none;
+    width: 100%;
+  }
+}
+
+.l-new-issue__form--select {
+  // .l-new-issue__step { transform: scale(0) }
+  .l-new-issue__repo {
+    background: #f8f8f8
+  }
+}
+
+.l-new-issue__footer {
+  background: $color-highlight;
+  border-radius: 0 0 $border-radius-window $border-radius-window;
+  border-top: 1px solid $color-highlight-border;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.l-new-issue__step { margin-right: 13px }
+
+.l-new-issue__repo,
+.l-new-issue__title {
+  display: flex;
+  padding: 14px 0 14px 20px;
+}
+
+.l-new-issue__repo {
+  border-bottom: 1px solid $color-border-light;
+}
+
+.l-new-issue__title__input,
+.l-new-issue__comment,
+.l-new-issue__context {
+  padding-right: 20px;
+}
+
+.l-new-issue__comment,
+.l-new-issue__context {
+  padding-left: 50px;
+}
+
+.l-new-issue__title__input {
+  border-bottom: 1px solid $color-border-light;
+  height: 38px;
+  width: 100%;
+
+  textarea {
+    color: $color-title;
+    font-size: $font-size-extra;
+    height: 24px;
+    min-height: 24px;
+    padding-top: 1px;
+  }
+}
+
+.l-new-issue__comment {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  min-height: 78px;
+  // height: 78px;
+
+  & > div {
+    height: 100%;
+    width: 100%;
+  }
+
+  textarea {
+    color: $color-label;
+    display: block;
+    height: 100%;
+    font-size: $font-size-base;
+    max-height: 150px;
+  }
+}
+
+.l-new-issue__context {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 40px;
+}
+
+.l-new-issue__assign {
+  .c-avatar { margin-left:5px }
+}

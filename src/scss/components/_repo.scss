@@ -1,0 +1,34 @@
+
+.c-repo {}
+
+// Milestones label
+// -------------------
+
+.c-repo_milestones {
+  background: $color-label-bkgd;
+  border-radius: 8px;
+  display: inline-block;
+  height: 16px;
+  line-height: 16px;
+  max-width: 70px;
+  padding: 0 6px;
+}
+
+.new .c-repo_milestones {
+  background: $color-highlight-bkgd;
+  color: $color-highlight-text;
+}
+
+// User
+// -------------------
+
+.c-repo__user {
+  background: $color-highlight-bkgd;
+  border: 1px solid $color-highlight-border;
+  border-radius: $border-radius-base;
+  color: $color-highlight-text;
+  display: inline-block;
+  font-family: $font-family-text-semibold;
+  font-size: 13px;
+  padding: 0 2px;
+}

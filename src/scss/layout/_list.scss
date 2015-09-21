@@ -1,0 +1,59 @@
+
+.l-list {
+  @include position( absolute, $chrome-min-height 0 $chrome-min-height 0);
+  background: #fff;
+  overflow-y: auto;
+  z-index: $z-list;
+
+  li {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 20px;
+
+    &.new {
+      background: $color-highlight
+    }
+  }
+
+  .c-issue__title {
+    line-height: $font-size-large;
+    margin-bottom: 7px;
+  }
+}
+
+.l-list__repo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.l-list__repo__data {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  align-items: center;
+  justify-content: flex-start;
+
+  .c-avatar {
+    flex-basis: 16px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    margin-right: 8px
+  }
+
+  .c-repo__name { max-width: 180px }
+  .s-repo__name--no-state { max-width: 290px }
+
+  .i-repo { margin: 0 3px }
+  .i-locked { margin-left: 5px }
+}
+
+.l-list__repo__state {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-grow: 0;
+  flex-shrink: 0;
+
+  & > * + * { margin-left: 8px }
+}
