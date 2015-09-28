@@ -1,7 +1,23 @@
+# OSX pollution
 .DS_Store
-build
-release
+
+# NPM stuffs
 node_modules
 npm-debug.log
+
+# NW.js build
+build
+release
+
+# Core Logger dump
+logs/*
+
+# GH App's settings
+github.json
+
+# dev sandbox
+tmp.js
 tmp
+
+# keep empty forlders
 !.gitkeep
