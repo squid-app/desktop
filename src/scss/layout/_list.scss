@@ -1,7 +1,24 @@
 
-.l-list {
+.l-list,
+.l-state {
   @include position( absolute, $chrome-min-height 0 $chrome-min-height 0);
   background: #fff;
+}
+
+.l-state {
+  z-index: ($z-list - 100)
+}
+
+.l-state__msg {
+  line-height: 15px;
+  text-align: center
+}
+
+.l-state__title {}
+.l-state__txt {}
+
+.l-list{
+  @include windowTransition();
   overflow-y: auto;
   z-index: $z-list;
 

@@ -7,27 +7,37 @@
 </head>
 <body class="gui__body">
 
-<div class="l-window l-window--arrow" style="height: 680px;">
+<div class="l-window l-window--arrow l-window--arrow-close active" _style="height: 680px;">
   <div class="l-window__inner">
     <div class="l-chrome l-chrome--header">
-      <div class="l-search">
-        <i class="i-search"></i>
-      </div><!-- /.l-search -->
-      <h3 class="l-section-selector">
-        <span class="ff-label fs-large co-label">window with arrow</span>
-        <i class="i-caret"></i>
-      </h3><!-- /.l-section-selector -->
-      <div class="l-back">
-        <i class="i-close"></i>
-      </div>
+      <div class="l-chrome__content">
+        <div class="l-search">
+          <i class="i-search"></i>
+        </div><!-- /.l-search -->
+        <h3 class="l-section-selector">
+          <span class="ff-label fs-large co-label">window with arrow</span>
+          <i class="i-caret"></i>
+        </h3><!-- /.l-section-selector -->
+        <div class="l-back">
+          <i class="i-close"></i>
+        </div>
+      </div><!-- /.l-chrome__content -->
     </div><!-- /.l-chrome--header -->
-    <div class="l-chrome l-chrome--footer -u-va">
-      <i class="i-gears"></i>
-      <div class="c-btn-action u-va">
-        <i class="i-add"></i>
+    <div class="l-chrome l-chrome--footer active">
+      <div class="l-chrome__content">
+        <i class="i-gears"></i>
+        <div class="c-btn-action u-va">
+          <i class="i-add"></i>
+        </div>
       </div>
     </div><!-- /.l-chrome--footer -->
-    <div class="l-list">
+    <div class="l-state u-va">
+      <div class="l-state__msg">
+        <h3 class="l-state__title ff-actor fs-small co-text u-uppercase">Fetching data<span>...</span></h3>
+        <p class="l-state__txt ff-regular">loading your repositories</p>
+      </div>
+    </div>
+    <div class="l-list active-">
       <ul>
         <li>
           <h3 class="c-issue__title ff-regular fs-base co-title u-ellipse">Design - padding is off</h3>

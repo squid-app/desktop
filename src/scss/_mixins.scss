@@ -1,0 +1,10 @@
+@mixin windowTransition(){
+  opacity: 0;
+  transform: scale(.9);
+  transition: all 400ms $ease;
+
+  &.active {
+    opacity: 1;
+    transform: scale(1)
+  }
+}
