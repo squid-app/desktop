@@ -1,7 +1,7 @@
 
 var Gui = window.require('nw.gui')
 
-var Tray = function()
+module.exports = Tray = function()
 {
   this._hires = this.hires()
 
