@@ -74,15 +74,17 @@ gulp.task('build:version', function ()
 gulp.task('build:package', function ()
 {
   var config = require('./config/desktop')
+    , name   = pkg.name
 
   if( environment !== 'prod' )
   {
     var devConfig = require('./config/dev')
     config = _.merge( config, devConfig )
+    name   = name + '-' + environment
   }
 
   var json = JSON.stringify({
-      'name':           'Squid'
+      'name':           name
     , 'version':        pkg.version
     , 'main':           'index.html'
     , 'single-instance': true
