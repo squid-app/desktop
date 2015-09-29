@@ -127,6 +127,10 @@ gulp.task('sass', function ()
 gulp.task('move', function()
 {
   gulp
+    .src(['./github.json'])
+    .pipe( gulp.dest( buildFolder ) )
+
+  gulp
     .src(['./src/html/*'])
     .pipe( gulp.dest( buildFolder ) )
 
