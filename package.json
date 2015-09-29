@@ -27,19 +27,19 @@
     "react-textarea-autosize": "^2.5.2",
     "react-router": "^1.0.0",
     "squid-config": "^0.2.0",
-    "squid-core": "^0.1.0"
+    "squid-core": "^0.4.0"
   },
   "devDependencies": {
-    "browserify": "^9.0.7",
     "del": "^2.0.1",
     "envify": "~3.0.0",
     "gulp": "3.9.0",
     "gulp-autoprefixer": "^2.1.0",
     "gulp-concat": "^2.2.0",
     "gulp-plumber": "^1.0.1",
+    "gulp-reactify": "^3.0.1",
     "gulp-replace-task": "^0.10.1",
     "gulp-sass": "^0.7.1",
-    "gulp-sourcemaps": "^1.5.0",
+    "gulp-sourcemaps": "^1.6.0",
     "gulp-util": "^3.0.6",
     "gulp-watch": "^0.6.4",
     "lodash": "^3.10.1",
@@ -47,9 +47,7 @@
     "nw": "^0.12.1",
     "reactify": "^0.17.1",
     "run-sequence": "^1.1.2",
-    "vinyl-source-stream": "^1.0.0",
-    "watchify": "~2.1.0",
-    "yargs": "^3.11.0"
+    "vinyl-source-stream": "^1.0.0"
   },
   "scripts": {
     "start": "nw ./build"

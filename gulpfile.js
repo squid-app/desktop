@@ -6,7 +6,6 @@ var buildFolder   = './build/'
   , plumber       = require('gulp-plumber')
   , del           = require('del')
   , source        = require('vinyl-source-stream')
-  , browserify    = require('browserify')
   , reactify      = require('reactify')
   , replace       = require('gulp-replace-task')
   , sequence      = require('run-sequence')
@@ -15,7 +14,6 @@ var buildFolder   = './build/'
   , sourcemaps    = require('gulp-sourcemaps')
   , autoprefixer  = require('gulp-autoprefixer')
   , concat        = require('gulp-concat')
-  , argv          = require('yargs').argv
   , pkg           = require('./package.json')
   , exec          = require('child_process').exec
   , _             = require('lodash')
@@ -143,14 +141,16 @@ gulp.task('move', function()
     .pipe( gulp.dest( buildFolder + '/config' ) )
 })
 
-
-gulp.task('browserify', function ()
+gulp.task('concat', function ()
 {
-  return browserify( './src/js/app.js' )
-    .transform( reactify )
-    .bundle()
-    .pipe( source('squid.js') )
-    .pipe( gulp.dest( buildFolder ) )
+  gulp.src([
+        './src/js/app.js'
+      , './src/js/utils/*.js'])
+    .pipe(require('gulp-reactify')())
+    .pipe( sourcemaps.init() )
+    .pipe( concat('squid.js') )
+    .pipe( sourcemaps.write() )
+    .pipe( gulp.dest( assetsFolder + 'js' ) )
 })
 
 // Commands
@@ -163,7 +163,7 @@ gulp.task('init', function()
     , 'build:package'
     , 'build:modules'
     , 'move'
-    , ['sass'] // , 'browserify'
+    , ['sass', 'concat']
     , 'watch'
     , function(){} )
 })
@@ -175,9 +175,10 @@ gulp.task('watch', function()
     , './src/js/**'
     , './src/html/*'
     , './config/*'
+    , './github.json'
   ], [
       'sass'
-    // , 'browserify'
+    , 'concat'
     , 'move'
   ])
 })
@@ -191,7 +192,7 @@ gulp.task('build', function()
     , 'build:package'
     , 'build:modules'
     , 'move'
-    , ['sass'] // , 'browserify'
+    , ['sass', 'concat']
     , function()
       {
         console.log('start build script')
