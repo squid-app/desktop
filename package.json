@@ -26,7 +26,7 @@
     "react": "^0.13.1",
     "react-textarea-autosize": "^2.5.2",
     "reflux": "^0.2.7",
-    "squid-config": "^0.2.0",
+    "squid-config": "^0.3.0",
     "squid-core": "^0.4.0"
   },
   "devDependencies": {

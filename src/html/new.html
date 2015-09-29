@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Squid</title>
+  <link rel="stylesheet" href="assets/css/squid.css">
+</head>
+<body>
+new issue
+  <script>
+
+global.document  = window.document
+global.navigator = window.navigator
+
+var React       = require('react')
+  , Gui         = window.require('nw.gui')
+  , Squid       = require('squid-core')
+  , GHapp       = require('./github.json')
+
+// Setup core config
+Squid.setup({
+    config: require('./node_modules/squid-core/lib/config/core')
+  , locale:   {
+        github: {
+            credentials: {
+                client_id:     GHapp.client_id
+              , client_secret: GHapp.client_secret
+            }
+        }
+      , logger: false
+    }
+  , env: 'dev'
+})
+
+console.log( Squid._VERSION )
+console.log( Squid._UID)
+console.log( Squid.getConfig() )
+
+  </script>
+</body>
+</html>
