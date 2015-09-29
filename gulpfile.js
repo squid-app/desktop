@@ -150,8 +150,8 @@ gulp.task('move', function()
 gulp.task('concat', function ()
 {
   gulp.src([
-        './src/js/app.js'
-      , './src/js/utils/*.js'])
+        './src/js/utils/*.js'
+      , './src/js/app.js'])
     .pipe(require('gulp-reactify')())
     .pipe( sourcemaps.init() )
     .pipe( concat('squid.js') )

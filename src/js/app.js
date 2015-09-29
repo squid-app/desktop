@@ -31,3 +31,21 @@ var HelloMessage = React.createClass({
 });
 
 React.render(<HelloMessage name="John" />,  document.getElementById('squid-app'))
+
+var Gui     = window.require('nw.gui')
+  , Win     = Gui.Window.get()
+
+var tmpTray = new Tray()
+console.log(tmpTray)
+
+  // Minimal Menu bar item
+  var nativeMenuBar = new Gui.Menu({ type: 'menubar' })
+
+  nativeMenuBar.createMacBuiltin('Squid')
+
+  Win.menu = nativeMenuBar
+
+tmpTray.get().on( 'click', function()
+{
+  console.log('tray ok')
+})
