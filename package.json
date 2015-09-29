@@ -30,6 +30,7 @@
     "squid-core": "^0.4.0"
   },
   "devDependencies": {
+    "browserify": "11.2.0",
     "del": "^2.0.1",
     "envify": "~3.0.0",
     "gulp": "3.9.0",
@@ -47,18 +48,13 @@
     "nw": "^0.12.1",
     "reactify": "^0.17.1",
     "run-sequence": "^1.1.2",
-    "yargs": "^3.11.0",
-    "vinyl-source-stream": "^1.0.0"
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.0.0",
+    "yargs": "^3.11.0"
   },
   "scripts": {
     "start": "nw ./build",
     "dev": "gulp auto-reload --task init",
     "build": "gulp build"
-  },
-  "browserify": {
-    "transform": [
-      "reactify",
-      "envify"
-    ]
   }
 }

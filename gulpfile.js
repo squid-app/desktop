@@ -6,6 +6,8 @@ var buildFolder   = './build/'
   , plumber       = require('gulp-plumber')
   , del           = require('del')
   , source        = require('vinyl-source-stream')
+  , buffer        = require('vinyl-buffer')
+  , browserify    = require('browserify')
   , reactify      = require('reactify')
   , replace       = require('gulp-replace-task')
   , sequence      = require('run-sequence')
@@ -149,16 +151,27 @@ gulp.task('move', function()
     .pipe( gulp.dest( buildFolder + '/config' ) )
 })
 
-gulp.task('concat', function ()
+gulp.task('browserify', function ()
 {
-  gulp.src([
-        './src/js/utils/*.js'
-      , './src/js/app.js'])
-    .pipe(require('gulp-reactify')())
-    .pipe( sourcemaps.init() )
-    .pipe( concat('squid.js') )
-    .pipe( sourcemaps.write() )
-    .pipe( gulp.dest( assetsFolder + 'js' ) )
+  // set up the browserify instance on a task basis
+  var bundle = browserify(
+  {
+      entries:   ['./src/js/app.js']
+    , paths:     ['./node_modules','./src/js/']
+    , basedir:    '.'
+    , fullPaths:  true
+    , debug:      true
+  })
+
+  return bundle
+          .transform('reactify')
+          .bundle()
+          .pipe( source('squid.js') )
+          .pipe( buffer() )
+          .pipe( sourcemaps.init( { loadMaps: true } ) )
+          .pipe( sourcemaps.write('./') )
+          .on('error', gutil.log)
+          .pipe( gulp.dest( assetsFolder + 'js' ) )
 })
 
 // Commands
@@ -190,7 +203,7 @@ gulp.task('init', function()
     , 'build:package'
     , 'build:modules'
     , 'move'
-    , ['sass', 'concat']
+    , ['sass', 'browserify']
     , 'watch'
     , function(){} )
 })
@@ -205,7 +218,7 @@ gulp.task('watch', function()
     , './github.json'
   ], [
       'sass'
-    , 'concat'
+    , 'browserify'
     , 'move'
   ])
 })
@@ -219,7 +232,7 @@ gulp.task('build', function()
     , 'build:package'
     , 'build:modules'
     , 'move'
-    , ['sass', 'concat']
+    , ['sass', 'browserify']
     , function()
       {
         console.log('start build script')
