@@ -14,8 +14,10 @@ var buildFolder   = './build/'
   , sourcemaps    = require('gulp-sourcemaps')
   , autoprefixer  = require('gulp-autoprefixer')
   , concat        = require('gulp-concat')
+  , argv          = require('yargs').argv
   , pkg           = require('./package.json')
   , exec          = require('child_process').exec
+  , spawn         = require('child_process').spawn
   , _             = require('lodash')
 
 if( gutil.env.prod === true )
@@ -161,6 +163,25 @@ gulp.task('concat', function ()
 
 // Commands
 // ---------------
+
+// reload Gulpfile on change
+gulp.task('auto-reload', function()
+{
+  var p
+
+  gulp.watch('gulpfile.js', spawnChildren)
+  spawnChildren();
+
+  function spawnChildren(e)
+  {
+    // kill previous spawned process
+    if(p)
+      p.kill()
+
+    // `spawn` a child `gulp` process linked to the parent `stdio`
+    p = spawn('gulp', [argv.task], {stdio: 'inherit'})
+  }
+})
 
 gulp.task('init', function()
 {

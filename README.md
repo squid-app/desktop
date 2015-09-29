@@ -29,44 +29,46 @@ All data are served by the [Github API](https://developer.github.com/v3/).
 First install required packages:
 
 	$ npm install
-	
+
 Than run Gulp command to build source and start `watch` task:
 
-	$ gulp init
-	
+	$ npm run dev
+
 `watch` task will automaticly update application's build when you change one of the following files:
 
 * `src/html/*`
 * `src/img/*`
+* `src/js/*`
+* `src/scss/*`
 * `config/*`
-* `scripts/updater.js`
-	
+* `github.json`
+
 Now you are ready to launch Squid. Go ahead and run into a new terminal window:
 
 	$ npm start
-		
-	
+
+
 ## Build app
 
 To build a standalone app and his installer run these command:
 
-	$ gulp build
-	
+	$ npm run build
+
 The freshly builded app will be available into the `release` folder.
 
 
 ## Github API Authorization
 
-As [recommended by Github](https://developer.github.com/v3/oauth/#non-web-application-flow) we use the Basic Authentication to create an OAuth2 token: 
+As [recommended by Github](https://developer.github.com/v3/oauth/#non-web-application-flow) we use the Basic Authentication to create an OAuth2 token:
 
 > With this technique, a username and password need not be stored permanently, and the user can revoke access at any time
 
 ## Troubleshoots
 
-if gulp throw a `'Error: EMFILE, open '/path/to/package.json' error`, run the following command: 
+if gulp throw a `'Error: EMFILE, open '/path/to/package.json' error`, run the following command:
 
-	ulimit -S -n 2048 
-	
+	ulimit -S -n 2048
+
 ## Roadmap
 
 See the [roadmap](https://github.com/squid-app/desktop/milestones) future developments.
