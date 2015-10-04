@@ -196,7 +196,7 @@ gulp.task('auto-reload', function()
   }
 })
 
-gulp.task('init', function()
+gulp.task('default', function()
 {
   sequence(
       'build:clean'

@@ -30,7 +30,11 @@ First install required packages:
 
 	$ npm install
 
-Than run Gulp command to build source and start `watch` task:
+If you want to start from a fresh new install and `watch` files change, run:
+
+  $ gulp
+
+Or run next command to build source and start `watch` task without download app packages:
 
 	$ npm run dev
 
