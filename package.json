@@ -20,6 +20,7 @@
     "ios"
   ],
   "dependencies": {
+    "async": "^1.4.2",
     "autosize": "^3.0.12",
     "moment": "^2.10.6",
     "pubsub-js": "^1.5.2",
