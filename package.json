@@ -40,6 +40,7 @@
     "gulp-plumber": "^1.0.1",
     "gulp-reactify": "^3.0.1",
     "gulp-replace-task": "^0.10.1",
+    "gulp-run": "^1.6.11",
     "gulp-sass": "^0.7.1",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-util": "^3.0.6",

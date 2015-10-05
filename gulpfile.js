@@ -58,7 +58,7 @@ gulp.task('build:clean', function()
 
 gulp.task('build:newrelease', function()
 {
-  return del( ['./build/*'] )
+  return del( [ releaseFolder + '*'] )
 })
 
 gulp.task('build:version', function ()
@@ -226,8 +226,8 @@ gulp.task('watch', function()
 gulp.task('build', function()
 {
   sequence(
-      'build:clean'
-    , 'build:newrelease'
+      'build:newrelease'
+    , 'build:clean'
     , 'build:version'
     , 'build:package'
     , 'build:modules'
