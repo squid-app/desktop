@@ -9,6 +9,18 @@
   <span class="window-arrow"></span>
   <div class="window" id="squid-app">
   </div><!-- /.window -->
+  <script>
+  var winston = require('winston')
+    , nw            = {
+          gui:     require('nw.gui')              // Load native UI library
+        , win:     require('nw.gui').Window.get() // Get the current window
+        , fs:      require('fs')
+        , process: process
+      }
+var homeDirectory = process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE;
+console.log(homeDirectory)
+    // , logger  = require('//utils/logger')
+  </script>
   <script src="assets/js/squid.js"></script>
 </body>
 </html>

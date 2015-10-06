@@ -18,6 +18,7 @@ var buildFolder   = './build/'
   , concat        = require('gulp-concat')
   , argv          = require('yargs').argv
   , pkg           = require('./package.json')
+  , run           = require('gulp-run')
   , exec          = require('child_process').exec
   , spawn         = require('child_process').spawn
   , _             = require('lodash')
@@ -102,9 +103,11 @@ gulp.task('build:package', function ()
 
 gulp.task('build:modules', function ()
 {
+  var cmd = 'npm install --prefix ./build --production'
+
   console.log('install package dependencies')
 
-  exec('npm install --prefix ./build --production', function (err, stdout, stderr){})
+  return run( cmd ).exec()
 })
 
 // Compile Sass
@@ -136,6 +139,10 @@ gulp.task('move', function()
 
   gulp
     .src(['./src/html/*'])
+    .pipe( gulp.dest( buildFolder ) )
+
+  gulp
+    .src(['./logs'])
     .pipe( gulp.dest( buildFolder ) )
 
   gulp
