@@ -8,7 +8,8 @@
 
 'use strict';
 
-var  _ = require('lodash')
+var  _      = require('lodash')
+  , winston = window.require('winston')
 
 winston.emitErrs = true
 
@@ -17,14 +18,11 @@ var _LOGNAME = '[Desktop::Utils::Logger] '
 // Initialize Logger Class
 //
 //      @params  {object}  config
-//      @params  {bool}    debug mode
 //      @return  {object}  Logger instance
 //
-var Logger = function( options, debug )
+var Logger = function( options )
 {
   this._LOGGER = false
-  this._DEBUG  = debug || false
-  this._LEVELS = [] // available levels
 
   options = options || false
 
@@ -37,74 +35,31 @@ var Logger = function( options, debug )
   if( _.isUndefined( options.transports ) )
     throw new Error( _LOGNAME + 'missing transports options' )
 
-  var transports = []
-    , logger     = options.transports
-
-  for( var i in logger )
-  {
-    if( logger[ i ] )
-    {
-      // store available levels
-      if( this._LEVELS.indexOf( logger[ i ].level ) === -1 )
-        this._LEVELS.push( logger[ i ].level )
-
-      // get transport output
-      var output = logger[ i ].outputTransports
-
-      // remove useless property
-      delete logger[ i ].outputTransports
-
-      // create transport
-      transports.push( new winston.transports[ output ]( logger[ i ] ) )
-    }
-  }
-
   //initialize logger
   this._LOGGER = new winston.Logger(
   {
-      transports:  transports
-    , exitOnError: options.exitOnError || false
+      exitOnError: options.exitOnError || false
+    , transports:  [
+         new winston.transports[ options.output || 'File' ]( options.transports )
+      ]
   })
 
   return this
 }
 
-// Return available levels
-//
-//      @return  {array}
-//
-Logger.prototype.getLevels = function()
-{
-  return this._LEVELS
-}
-
-// Check if required levels exists
-//
-//      @params  {string} required level
-//      @return  {bool}
-//
-Logger.prototype.isValidLevel = function( level )
-{
-  return ( this._LEVELS.indexOf( level ) !== -1 )
-}
-
 // Display info level message
 //
-//      @params  {string} log level, `info` or `debug`
 //      @params  {mixed}  single message or an array of messages
 //      @return  {void}
 //
-Logger.prototype.print = function( level, message )
+Logger.prototype.print = function( message )
 {
   // Logger is not setup
   if( !this._LOGGER )
     return
 
-  // if we get a single message
-  if( !_.isArray( message ) )
-    messages = [ message ]
-
-  this._LOGGER[ level ].apply( this, message )
+  // Strange ... need to fix that
+  this._LOGGER._LOGGER.info.apply( this, arguments )
 }
 
 module.exports = Logger

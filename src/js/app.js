@@ -8,6 +8,19 @@ var _           = require('lodash')
   , GHapp       = require('../../github.json')
   , config      = require('../../config/desktop')
   , Logger      = require('./utils/logger')
+  , localeLogger = new Logger({
+        exitOnError: true
+      , output:      'Console'
+      , transports: {
+            level:            'info'
+          , filename:         './logs/all-logs.log'
+          , handleExceptions: false
+          , json:             false
+          , maxsize:          5242880 //5MB
+          , maxFiles:         5
+          , colorize:         false
+        }
+    })
 
 Gui.Window.get().showDevTools()
 
@@ -20,9 +33,9 @@ Squid.setup({
               , client_secret: GHapp.client_secret
             }
         }
+      , logger:  localeLogger
     })
   , envName: 'dev'
-  , logger:  Logger
 })
 
 // console.log( Squid.getConfig() )
