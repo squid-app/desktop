@@ -27,27 +27,51 @@ var Squid = function()
   return this
 }
 
-Squid.prototype.userHome = function( directory )
+// Path and Directories
+//-------------------------------
+
+// Get the application's data path in user's directory
+//
+//      @return  {string}
+//
+Squid.prototype.dataPath = function()
 {
-  // Gui.App.dataPath
+  return window.require('nw.gui').App.dataPath
+}
 
-  var path  = window.process.env['HOME'] + '/.squid'
-    , fs    = window.require('fs')
-    , isDir = function( p )
-      {
-        if( !fs.existsSync( p ) )
-        {
-          fs.mkdirSync( p, '0755' )
-        }
-      }.bind( this )
+// Check if directory exist or create it.
+//
+//      @params  {string}  directory path
+//      @return  {void}
+//
+Squid.prototype.isDirectoryExists = function( path )
+{
+  var fs = window.require('fs')
 
-  isDir( path )
-
-  if( _.isString( directory ) )
+  if( !fs.existsSync( path ) )
   {
-    path += directory
+    fs.mkdirSync( path, '0755' )
+  }
+}
 
-    isDir( path )
+// Get Squid folder in the user's home directory
+// If folder does not exist, we create it.
+// We can ask for a sub folder. If it doesn't exist we create it
+//
+//      @params  {string}  subfolder in Squid directory
+//      @return  {string}
+//
+Squid.prototype.userHome = function( subfolder )
+{
+  var path  = window.process.env['HOME'] + '/.squid'
+
+  this.isDirectoryExists( path )
+
+  if( _.isString( subfolder ) )
+  {
+    path += subfolder
+
+    this.isDirectoryExists( path )
   }
 
   return path

@@ -9,4 +9,13 @@ module.exports = {
       , transparent: false
       , show:        true
     }
+  , logger: {
+        exitOnError: true
+      , output:      'Console'
+      , transports: {
+            filename:         false
+          , handleExceptions: false
+        }
+    }
+  , showDevTools:    true
 }

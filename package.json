@@ -1,5 +1,6 @@
 {
   "name": "squid-desktop",
+  "displayName": "squid",
   "description": "Squid gives you a quick access to all your Github issues.",
   "version": "0.1.0",
   "license": "MIT",

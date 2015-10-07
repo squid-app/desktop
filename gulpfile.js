@@ -79,22 +79,25 @@ gulp.task('build:version', function ()
 gulp.task('build:package', function ()
 {
   var config = require('./config/desktop')
-    , name   = pkg.name
+    , name   = pkg.displayName
 
   if( environment !== 'prod' )
   {
-    var devConfig = require('./config/dev')
-    config = _.merge( config, devConfig )
+    var envConfig = require( './config/' + environment )
+    config = _.merge( config, envConfig )
     name   = name + '-' + environment
   }
 
   var json = JSON.stringify({
-      'name':           name
-    , 'version':        pkg.version
-    , 'main':           'index.html'
+      'name':            name
+    , 'version':         pkg.version
+    , 'main':            'index.html'
     , 'single-instance': true
     , 'window':          config.window
     , 'dependencies':    pkg.dependencies
+    , 'showDevTools':    config.showDevTools
+    , 'logger':          config.logger
+    , 'githubApp':       require('./github.json')
   }, null, 2)
 
   return string_src( 'package.json', json)
@@ -133,17 +136,17 @@ gulp.task('sass', function ()
 
 gulp.task('move', function()
 {
-  gulp
-    .src(['./github.json'])
-    .pipe( gulp.dest( buildFolder ) )
+  // gulp
+  //   .src(['./github.json'])
+  //   .pipe( gulp.dest( buildFolder ) )
 
   gulp
     .src(['./src/html/*'])
     .pipe( gulp.dest( buildFolder ) )
 
-  gulp
-    .src(['./logs'])
-    .pipe( gulp.dest( buildFolder ) )
+  // gulp
+  //   .src(['./logs'])
+  //   .pipe( gulp.dest( buildFolder ) )
 
   gulp
     .src(['./src/img/**/*'])
@@ -153,9 +156,9 @@ gulp.task('move', function()
     .src([ './src/fonts/**/*' ])
     .pipe( gulp.dest( assetsFolder + 'fonts' ) )
 
-  gulp
-    .src([ './config/**/*' ])
-    .pipe( gulp.dest( buildFolder + '/config' ) )
+  // gulp
+  //   .src([ './config/**/*' ])
+  //   .pipe( gulp.dest( buildFolder + '/config' ) )
 })
 
 gulp.task('browserify', function ()

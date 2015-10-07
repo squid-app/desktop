@@ -1,0 +1,6 @@
+/**
+ * Squid Desktop
+ *
+ */
+
+'use strict';
