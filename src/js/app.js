@@ -28,6 +28,5 @@ Squid.setup({
 // console.log( Squid.getConfig() )
 
 var desktop = require('./desktop')
-  , d       = new desktop( nw )
-console.log(d)
-console.log(d.userHome('/logs'))
+console.log(desktop)
+console.log(desktop.userHome('/logs'))

@@ -9,7 +9,7 @@ var _       = require('lodash')
 
 var __dirseparator = '/'
 
-var Squid = function( nw )
+var Squid = function()
 {
   // APP'S Constants
   // -------------
@@ -19,9 +19,6 @@ var Squid = function( nw )
 
   // installed version
   this._INSTALLEDVERSION = 'VERSION'
-
-  // node env
-  this._NW               = nw
 
   // test instance uniqueness
   this._UID         = _.uniqueId('squid_')
@@ -34,8 +31,8 @@ Squid.prototype.userHome = function( directory )
 {
   // Gui.App.dataPath
 
-  var path  = this._NW.process.env['HOME'] + '/.squid'
-    , fs    = this._NW.fs
+  var path  = window.process.env['HOME'] + '/.squid'
+    , fs    = window.require('fs')
     , isDir = function( p )
       {
         if( !fs.existsSync( p ) )
@@ -60,4 +57,4 @@ Squid.prototype.userHome = function( directory )
 // Init
 // ----------
 
-module.exports = Squid
+module.exports = new Squid()
