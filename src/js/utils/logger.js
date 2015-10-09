@@ -1,5 +1,5 @@
 /**
- * Squid Core
+ * Squid Desktop
  *
  * Advanced logging with NodeJs
  * http://tostring.it/2014/06/23/advanced-logging-with-nodejs/
@@ -43,8 +43,11 @@ var Logger = function( options )
          new winston.transports[ options.output || 'File' ]( options.transports )
       ]
   })
+}
 
-  return this
+Logger.prototype.getEngineName = function()
+{
+  return 'WINSTON'
 }
 
 // Display info level message
@@ -58,8 +61,7 @@ Logger.prototype.print = function( message )
   if( !this._LOGGER )
     return
 
-  // Strange ... need to fix that
-  this._LOGGER._LOGGER.info.apply( this, arguments )
+  this._LOGGER.info.apply( this, arguments )
 }
 
 module.exports = Logger
