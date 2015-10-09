@@ -188,25 +188,25 @@ gulp.task('browserify', function ()
 // ---------------
 
 // reload Gulpfile on change
-gulp.task('auto-reload', function()
+gulp.task('default', function()
 {
   var p
 
-  gulp.watch('gulpfile.js', spawnChildren)
-  spawnChildren();
+  gulp.watch( 'gulpfile.js', spawnChildren )
+  spawnChildren()
 
-  function spawnChildren(e)
+  function spawnChildren( event )
   {
     // kill previous spawned process
-    if(p)
+    if( p )
       p.kill()
 
     // `spawn` a child `gulp` process linked to the parent `stdio`
-    p = spawn('gulp', [argv.task], {stdio: 'inherit'})
+    p = spawn( 'gulp', ['init'], {stdio: 'inherit'} )
   }
 })
 
-gulp.task('default', function()
+gulp.task('init', function()
 {
   sequence(
       'build:clean'
@@ -222,9 +222,9 @@ gulp.task('watch', function()
 {
   gulp.watch( [
       './src/scss/**'
-    , './src/js/**'
-    , './src/html/*'
-    , './config/*'
+    , './src/js/**/*'
+    , './src/html/**/*'
+    , './config/**/*'
     , './github.json'
   ], [
       'sass'
