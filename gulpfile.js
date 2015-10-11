@@ -2,6 +2,7 @@ var buildFolder   = './build/'
   , assetsFolder  = buildFolder + 'assets/'
   , releaseFolder = './release/'
   , environment   = 'dev'
+  , noModules     = false
   , gulp          = require('gulp')
   , plumber       = require('gulp-plumber')
   , del           = require('del')
@@ -24,6 +25,7 @@ var buildFolder   = './build/'
   , spawn         = require('child_process').spawn
   , config        = require('./config/desktop')
 
+
 if( argv.prod === true )
   environment = 'prod'
 
@@ -32,6 +34,9 @@ if( environment !== 'prod' )
   var envConfig = require( './config/' + environment )
   config = require('lodash').merge( config, envConfig )
 }
+
+if( argv.noModules )
+  noModules = argv.noModules
 
 // Gulp plumber error handler
 var onError = function(err) {
@@ -59,7 +64,12 @@ function string_src(filename, string)
 
 gulp.task('build:clean', function()
 {
-  return del( [ buildFolder + '*'] )
+  var files = [ buildFolder + '*' ]
+
+  if( noModules )
+    files.push( buildFolder + 'node_modules' )
+
+  return del( files )
 })
 
 gulp.task('build:version', function ()
@@ -124,7 +134,7 @@ gulp.task('build:config', function ()
 })
 
 gulp.task('build:modules', shell.task([
-  'npm install --prefix ./build --production'
+  ( noModules ) ? 'do not reload npm modules' :  'npm install --prefix ./build --production'
 ]))
 
 // Compile Sass
@@ -181,7 +191,7 @@ gulp.task('build:browserify', function ()
           .on( 'error', gutil.log )
           .pipe( source('squid.js') )
           .pipe( buffer() )
-          .pipe( uglify() )
+          // .pipe( uglify() )
           .pipe( sourcemaps.init( { loadMaps: true } ) )
           .pipe( sourcemaps.write('./') )
           .pipe( gulp.dest( assetsFolder + 'js' ) )
