@@ -1,50 +1,65 @@
+/**
+ * Squid Desktop
+ *
+ * Display menubar icon and
+ * manage main window visibility
+ *
+ */
+
+'use strict';
 
 var Gui = window.require('nw.gui')
 
-module.exports = Tray = function()
+var Tray = function( hires )
 {
-  this._hires = this.hires()
+  this._HIRES = hires
 
-  var icon    = ( this._hires ) ? 'anchor-black-@2x.png' : 'anchor-black.png'
-    , alticon = ( this._hires ) ? 'anchor-white-@2x.png' : 'anchor-white.png'
-
+  // Setup menubar icon
+  // depending on screen resolution and OS theme
+  var icon    = ( this._HIRES ) ? 'anchor-black-@2x.png' : 'anchor-black.png'
+    , alticon = ( this._HIRES ) ? 'anchor-white-@2x.png' : 'anchor-white.png'
 
   // Create a tray icon
-  this._tray = new Gui.Tray({
+  this._TRAY = new Gui.Tray({
       title:   ''
     , icon:    'assets/img/' + icon
     , alticon: 'assets/img/' + alticon
   })
 
-  return this
+  // Minimal Menu bar item
+  var nativeMenuBar = new Gui.Menu({ type: 'menubar' })
+
+  nativeMenuBar.createMacBuiltin('Squid')
+
+  Gui.Window.get().menu = nativeMenuBar
+
+  // Test, to remove
+  this._TRAY.on( 'click', function()
+  {
+    window.require('nw.gui').Window.open('new.html', {
+        'position': 'center'
+      , 'focus':    true
+      , 'toolbar':  true
+      , 'frame':    true
+      , 'width':    475
+      , 'height':   330
+    })
+  })
 }
 
-//  test for retina / high resolution / high pixel density.
-Tray.prototype.hires = function()
-{
-  // starts with default value for modern browsers
-  var dpr = window.devicePixelRatio ||
-
-  // fallback for IE
-      (window.screen.deviceXDPI / window.screen.logicalXDPI) ||
-
-  // default value
-      1;
-
-  return !!(dpr > 1);
-}
-
-// Get _tray instance
+// Get _TRAY instance
 Tray.prototype.get = function()
 {
-  return this._tray
+  return this._TRAY
 }
 
-// Set new icon
+// Update menubar icon icon
 Tray.prototype.set = function( icon )
 {
-  if( this._hires )
+  if( this._HIRES )
     icon = icon + '-@2x'
 
-  this._tray.icon = icon + '.png'
+  this._TRAY.icon = icon + '.png'
 }
+
+module.exports = Tray
