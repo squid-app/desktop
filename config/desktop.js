@@ -19,7 +19,7 @@ module.exports = {
       , output:      'File'
       , transports: {
             level:            'info'
-          , filename:         '/logs/info.log'
+          , filename:         '/logs.log'
           , handleExceptions: true
           , json:             true
           , maxsize:          5242880 //5MB

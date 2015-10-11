@@ -12,12 +12,16 @@ release
 # Core Logger dump
 logs/*
 
+# Builded Config
+src/js/config.js
+
 # GH App's settings
 github.json
 
 # dev sandbox
 tmp.js
 tmp
+v8.log
 
 # keep empty forlders
 !.gitkeep

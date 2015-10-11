@@ -10,6 +10,7 @@ var buildFolder   = './build/'
   , browserify    = require('browserify')
   , reactify      = require('reactify')
   , replace       = require('gulp-replace-task')
+  , rename        = require('gulp-rename')
   , sequence      = require('run-sequence')
   , gutil         = require('gulp-util')
   , sass          = require('gulp-sass')
@@ -19,12 +20,17 @@ var buildFolder   = './build/'
   , shell         = require('gulp-shell')
   , argv          = require('yargs').argv
   , pkg           = require('./package.json')
-  , exec          = require('child_process').exec
   , spawn         = require('child_process').spawn
-  , _             = require('lodash')
+  , config        = require('./config/desktop')
 
 if( argv.prod === true )
   environment = 'prod'
+
+if( environment !== 'prod' )
+{
+  var envConfig = require( './config/' + environment )
+  config = require('lodash').merge( config, envConfig )
+}
 
 // Gulp plumber error handler
 var onError = function(err) {
@@ -52,12 +58,7 @@ function string_src(filename, string)
 
 gulp.task('build:clean', function()
 {
-  return del( ['./build/*'] )
-})
-
-gulp.task('build:newrelease', function()
-{
-  return del( [ releaseFolder + '*'] )
+  return del( [ buildFolder + '*'] )
 })
 
 gulp.task('build:version', function ()
@@ -76,15 +77,10 @@ gulp.task('build:version', function ()
 
 gulp.task('build:package', function ()
 {
-  var config = require('./config/desktop')
-    , name   = pkg.displayName
+  var name   = pkg.displayName
 
   if( environment !== 'prod' )
-  {
-    var envConfig = require( './config/' + environment )
-    config = _.merge( config, envConfig )
     name   = name + '-' + environment
-  }
 
   var json = JSON.stringify({
       'name':            name
@@ -93,13 +89,37 @@ gulp.task('build:package', function ()
     , 'single-instance': true
     , 'window':          config.window
     , 'dependencies':    pkg.dependencies
-    , 'showDevTools':    config.showDevTools
-    , 'logger':          config.logger
-    , 'githubApp':       require('./github.json')
   }, null, 2)
 
   return string_src( 'package.json', json )
             .pipe( gulp.dest( buildFolder ) )
+})
+
+gulp.task('build:config', function ()
+{
+  return gulp.src( './src/config_tpl.txt' )
+      .pipe( replace({
+        patterns: [
+            {
+                match:       'showDevTools'
+              , replacement: config.showDevTools
+            }
+          , {
+                match:       'logger'
+              , replacement: config.logger
+            }
+          , {
+                match:       'storage'
+              , replacement: config.storage
+            }
+          , {
+                match:       'githubApp'
+              , replacement: require('./github.json')
+            }
+        ]
+      }))
+      .pipe( rename('config.js') )
+      .pipe( gulp.dest( './src/js' ) )
 })
 
 gulp.task('build:modules', shell.task([
@@ -107,27 +127,28 @@ gulp.task('build:modules', shell.task([
 ]))
 
 // Compile Sass
-gulp.task('sass', function()
+gulp.task('build:sass', function()
 {
-  gulp.src('./src/scss/squid.scss')
+  gulp.src( './src/scss/squid.scss' )
     .pipe(plumber({
-      errorHandler: onError
+        errorHandler: onError
     }))
     .pipe( sourcemaps.init() )
     .pipe( sass({
         includePaths: require('node-bourbon').includePaths
       , errLogToConsole: true
     }) )
-    .pipe(sourcemaps.write())
-    .pipe(autoprefixer(
-    {
-        browsers: ['last 2 versions']
-      , cascade: false
-    }))
+    .pipe( sourcemaps.write() )
     .pipe( gulp.dest( assetsFolder + 'css' ) )
+
+    // .pipe( autoprefixer(
+    // {
+    //     browsers: ['last 2 versions']
+    //   , cascade: false
+    // }) )
 })
 
-gulp.task('move', function()
+gulp.task('build:move', function()
 {
   gulp
     .src(['./src/html/*'])
@@ -142,13 +163,13 @@ gulp.task('move', function()
     .pipe( gulp.dest( assetsFolder + 'fonts' ) )
 })
 
-gulp.task('browserify', function ()
+gulp.task('build:browserify', function ()
 {
   // set up the browserify instance on a task basis
   var bundle = browserify(
   {
       entries:   ['./src/js/app.js']
-    , paths:     ['./node_modules','./src/js/']
+    , paths:     ['./node_modules','./src/js/', './config/']
     , basedir:    '.'
     , fullPaths:  true
     , debug:      true
@@ -157,13 +178,36 @@ gulp.task('browserify', function ()
   return bundle
           .transform('reactify')
           .bundle()
+          .on( 'error', gutil.log )
           .pipe( source('squid.js') )
           .pipe( buffer() )
-          .pipe( sourcemaps.init( { loadMaps: true } ) )
-          .pipe( sourcemaps.write('./') )
-          .on('error', gutil.log)
-          .pipe( gulp.dest( assetsFolder + 'js' ) )
+          .pipe( gulp.dest( buildFolder ) )
+          .pipe( shell( './node_modules/nw/nwjs/nwjc ./build/squid.js ./build/squid.bin') )
+
+          //
+          // .pipe( sourcemaps.init( { loadMaps: true } ) )
+          // .pipe( sourcemaps.write('./') )
 })
+
+
+gulp.task('build:post', function ()
+{
+  return del( [
+      './build/squid.js'
+  ] )
+})
+
+
+gulp.task('release:clean', function()
+{
+  return del( [ releaseFolder + '*'] )
+})
+
+gulp.task('release:package', shell.task([
+    'echo start build script'
+  , './scripts/build.sh'
+]))
+
 
 // Commands
 // ---------------
@@ -192,11 +236,12 @@ gulp.task('init', function()
   sequence(
       'build:clean'
     , 'build:package'
+    , 'build:config'
     , 'build:modules'
-    , 'move'
-    , ['sass', 'browserify']
-    , 'watch'
-    , function(){} )
+    , 'build:move'
+    , ['build:sass', 'build:browserify']
+    , 'build:post'
+    , 'watch')
 })
 
 gulp.task('watch', function()
@@ -208,32 +253,28 @@ gulp.task('watch', function()
     , './config/*'
     , './github.json'
   ], [
-      'sass'
-    , 'browserify'
-    , 'move'
-    , 'build:package'
+      'build:package'
+    , 'build:config'
+    , 'build:move'
+    , 'build:sass'
+    , 'build:browserify'
+    , 'build:post'
   ])
 })
 
 gulp.task('build', function()
 {
   sequence(
-      'build:newrelease'
+      'release:clean'
     , 'build:clean'
     , 'build:version'
     , 'build:package'
+    , 'build:config'
     , 'build:modules'
-    , 'move'
-    , ['sass', 'browserify']
-    , function()
-      {
-        console.log('start build script')
-
-        exec('./scripts/build.sh', function (err, stdout, stderr)
-        {
-          console.log('build done')
-        })
-      })
+    , 'build:move'
+    , ['build:sass', 'build:browserify']
+    , 'build:post'
+    , 'release:package')
 })
 
 

@@ -15,6 +15,7 @@ module.exports = {
       , transports: {
             filename:         false
           , handleExceptions: false
+          , json:             false
         }
     }
   , showDevTools:    true
