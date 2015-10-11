@@ -5,22 +5,61 @@
   <title>Squid</title>
   <link rel="stylesheet" href="assets/css/squid.css">
 </head>
-<body>
-  <span class="window-arrow"></span>
-  <div class="window" id="squid-app">
-  </div><!-- /.window -->
-  <script>
-//   var winston = require('winston')
-//     , nw            = {
-//           gui:     require('nw.gui')              // Load native UI library
-//         , win:     require('nw.gui').Window.get() // Get the current window
-//         , fs:      require('fs')
-//         , process: process
-//       }
-// var homeDirectory = process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE;
-// console.log(homeDirectory)
-    // , logger  = require('//utils/logger')
-  </script>
+<body style="background:red">
+  <div class="l-window l-window--arrow l-window--arrow-close active" _style="height: 680px;">
+    <div class="l-window__inner">
+      <div class="l-chrome l-chrome--header">
+        <div class="l-chrome__content">
+          <div class="l-search">
+            <i class="i-search"></i>
+          </div><!-- /.l-search -->
+          <h3 class="l-section-selector">
+            <span class="ff-label fs-large co-label">window with arrow</span>
+            <i class="i-caret"></i>
+          </h3><!-- /.l-section-selector -->
+          <div class="l-back">
+            <i class="i-close"></i>
+          </div>
+        </div><!-- /.l-chrome__content -->
+      </div><!-- /.l-chrome--header -->
+      <div class="l-chrome l-chrome--footer active">
+        <div class="l-chrome__content">
+          <i class="i-gears"></i>
+          <div class="c-btn-action u-va">
+            <i class="i-add"></i>
+          </div>
+        </div>
+      </div><!-- /.l-chrome--footer -->
+      <div class="l-state u-va">
+        <div class="l-state__msg">
+          <h3 class="l-state__title ff-actor fs-small co-text u-uppercase">Fetching data<span>...</span></h3>
+          <p class="l-state__txt ff-regular">loading your repositories</p>
+        </div>
+      </div>
+      <div class="l-list active-"></div><!-- /.l-list -->
+      <div class="l-issue selected- displayed-"></div><!-- /.l-issue -->
+    </div><!-- /.l-window__inner -->
+  </div><!-- /.l-window -->
   <script src="assets/js/squid.js"></script>
+  <script>
+  // Load App
+  // window.require('nw.gui').Window.get().evalNWBin(null, './squid.bin')
+
+  // Init
+  // ----------
+  window.onload = function()
+  {
+    console.log(Squid)
+    // console.log(Squid.userHome('/logs'))
+    console.log( Squid._UID)
+    console.log(Squid.core().getConfig() )
+    // console.log(Squid.core().logger().getEngine() )
+    console.log('index')
+
+    Squid.windows('main')
+    // Squid.core().storage().set('test', 0)
+    // console.log(Squid.core().storage().get('test', 'ko'))
+  }
+  </script>
 </body>
 </html>

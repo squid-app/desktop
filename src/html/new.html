@@ -5,37 +5,79 @@
   <title>Squid</title>
   <link rel="stylesheet" href="assets/css/squid.css">
 </head>
-<body>
-new issue
+<body style="background:blue">
+  <div class="l-window l-window--new-issue">
+    <div class="l-chrome l-chrome--header">
+      <h3 class="l-section-selector">
+        <span class="ff-label fs-large co-label">Brand New Issue</span>
+        <i class="i-close"></i>
+      </h3><!-- /.l-section-selector -->
+    </div><!-- /.l-chrome--header -->
+    <div class="l-new-issue">
+      <div class="l-new-issue__form l-new-issue__form--select">
+        <div class="l-new-issue__repo">
+          <div class="l-new-issue__step ff-regular fs-giant co-text">1</div>
+          <div class="l-new-issue__repo__input"></div>
+            <div class="l-list__repo__data">
+              <span class="c-avatar c-avatar--small">
+                <img src="https://avatars.githubusercontent.com/u/6358235?v=3&amp;s=16" width="16">
+              </span>
+              <span class="c-repo__name ff-actor fs-small co-text u-uppercase">
+                front
+                <i class="i-repo"></i>
+                API-SYNC
+                <i class="i-locked highlight"></i>
+              </span>
+            </div>
+        </div>
+        <div class="l-new-issue__title">
+          <div class="l-new-issue__step ff-regular fs-giant co-text">2</div>
+          <div class="l-new-issue__title__input">
+            <textarea placeholder="Title goes here"></textarea>
+          </div>
+        </div>
+        <div class="l-new-issue__comment"><div>
+          <textarea placeholder="Description goes here" rows="2">Design at RadPad is special in that it leads everything we do here. Renting is such a typically frustrating experience, and RadPad sets itself apart from "the other guys" with intuitive, delightful experiences. We believe when design and engineering work in harmony, you can create something magical.</textarea>
+        </div></div>
+        <div class="l-new-issue__context">
+          <div class="l-new-issue__labels ff-label fs-small u-va">
+            <i class="i-label"></i>
+            add tag
+          </div><!-- /.l-new-issue__labels -->
+          <div class="l-new-issue__assign ff-label fs-small u-va">
+            @julie
+            <span class="c-avatar c-avatar--small c-avatar--user">
+              <img src="https://randomuser.me/api/portraits/med/men/20.jpg">
+              <span></span>
+            </span>
+          </div><!-- /.l-new-issue__labels -->
+        </div>
+        <div class="l-new-issue__footer new">
+          <span class="c-repo_milestones ff-action co-text fs-small">0.2.0</span>
+          <button class="c-btn-submit ff-action fs-small" readonly>Submit</button>
+        </div>
+      </div><!-- /.l-new-issue__form -->
+    </div><!-- /.l-new-issue -->
+  </div>
+  <script src="assets/js/squid.js"></script>
   <script>
+  // Load App
+  // window.require('nw.gui').Window.get().evalNWBin(null, 'squid.bin')
 
-global.document  = window.document
-global.navigator = window.navigator
+  // Init
+  // ----------
+  window.onload = function()
+  {
+    console.log( Squid._VERSION )
+    console.log( Squid._UID)
+    console.log(Squid.core().getConfig() )
 
-var React       = require('react')
-  , Gui         = window.require('nw.gui')
-  , Squid       = require('squid-core')
-  , GHapp       = require('./github.json')
+    // var test = Squid.core().storage().get('test', 'ko')
+    // Squid.core().storage().set('test', ++test)
+    // console.log(Squid.core().storage().get('test', 'ko'))
 
-// Setup core config
-Squid.setup({
-    config: require('./node_modules/squid-core/lib/config/core')
-  , locale:   {
-        github: {
-            credentials: {
-                client_id:     GHapp.client_id
-              , client_secret: GHapp.client_secret
-            }
-        }
-      , logger: false
-    }
-  , env: 'dev'
-})
-
-console.log( Squid._VERSION )
-console.log( Squid._UID)
-console.log( Squid.getConfig() )
-
+    console.log('new')
+  }
   </script>
 </body>
 </html>
