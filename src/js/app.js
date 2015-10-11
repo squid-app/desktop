@@ -65,7 +65,7 @@ var Squid = function()
   // -------------------------------
 
   // Setup Squid core
-  this._CORE = require('squid-core').setup({
+  this._CORE = window.require('squid-core').setup({
       locale:   {
           github:  this.setupGhApp()
         , logger:  this.setupLogger()
