@@ -16,22 +16,20 @@ var buildFolder   = './build/'
   , sourcemaps    = require('gulp-sourcemaps')
   , autoprefixer  = require('gulp-autoprefixer')
   , concat        = require('gulp-concat')
+  , shell         = require('gulp-shell')
   , argv          = require('yargs').argv
   , pkg           = require('./package.json')
-  , run           = require('gulp-run')
   , exec          = require('child_process').exec
   , spawn         = require('child_process').spawn
   , _             = require('lodash')
 
-if( gutil.env.prod === true )
+if( argv.prod === true )
   environment = 'prod'
-
 
 // Gulp plumber error handler
 var onError = function(err) {
   console.log(err);
 }
-
 
 // Helpers
 // ---------------
@@ -68,8 +66,8 @@ gulp.task('build:version', function ()
       .pipe(replace({
         patterns: [
           {
-            match: 'version',
-            replacement: pkg.version
+              match:       'version'
+            , replacement: pkg.version
           }
         ]
       }))
@@ -100,21 +98,16 @@ gulp.task('build:package', function ()
     , 'githubApp':       require('./github.json')
   }, null, 2)
 
-  return string_src( 'package.json', json)
+  return string_src( 'package.json', json )
             .pipe( gulp.dest( buildFolder ) )
 })
 
-gulp.task('build:modules', function ()
-{
-  var cmd = 'npm install --prefix ./build --production'
-
-  console.log('install package dependencies')
-
-  return run( cmd ).exec()
-})
+gulp.task('build:modules', shell.task([
+  'npm install --prefix ./build --production'
+]))
 
 // Compile Sass
-gulp.task('sass', function ()
+gulp.task('sass', function()
 {
   gulp.src('./src/scss/squid.scss')
     .pipe(plumber({
@@ -136,17 +129,9 @@ gulp.task('sass', function ()
 
 gulp.task('move', function()
 {
-  // gulp
-  //   .src(['./github.json'])
-  //   .pipe( gulp.dest( buildFolder ) )
-
   gulp
     .src(['./src/html/*'])
     .pipe( gulp.dest( buildFolder ) )
-
-  // gulp
-  //   .src(['./logs'])
-  //   .pipe( gulp.dest( buildFolder ) )
 
   gulp
     .src(['./src/img/**/*'])
@@ -155,10 +140,6 @@ gulp.task('move', function()
   gulp
     .src([ './src/fonts/**/*' ])
     .pipe( gulp.dest( assetsFolder + 'fonts' ) )
-
-  // gulp
-  //   .src([ './config/**/*' ])
-  //   .pipe( gulp.dest( buildFolder + '/config' ) )
 })
 
 gulp.task('browserify', function ()
@@ -223,13 +204,14 @@ gulp.task('watch', function()
   gulp.watch( [
       './src/scss/**'
     , './src/js/**/*'
-    , './src/html/**/*'
-    , './config/**/*'
+    , './src/html/*'
+    , './config/*'
     , './github.json'
   ], [
       'sass'
     , 'browserify'
     , 'move'
+    , 'build:package'
   ])
 })
 
