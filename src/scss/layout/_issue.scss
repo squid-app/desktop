@@ -204,12 +204,16 @@
 // New Issue form
 // -----------------
 
-.l-new-issue { height: 100% }
+.l-new-issue {
+  border-radius: 6px;
+  height: 100%;
+  overflow: hidden;
+}
 
 .l-new-issue__form {
   display: flex;
   flex-direction: column;
-  margin-top: $chrome-min-height;
+  // margin-top: $chrome-min-height;
 
   textarea {
     @include placeholder { color: $color-text }

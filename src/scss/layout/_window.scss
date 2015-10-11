@@ -9,7 +9,8 @@ $chromeFooter: unquote('linear-gradient(-180deg, #f4f3f4 0%, #d6d3D6 100%);');
   background: #fff;
   border-radius: $border-radius-window;
   position: relative;
-  filter: drop-shadow( $color-label 0 1px 12px);
+  -webkit-filter: drop-shadow( $color-label 0 1px 12px);
+  margin: 12px;
   // min-height: 300px;
   position: relative;
   width: 350px;
@@ -46,9 +47,7 @@ $chromeFooter: unquote('linear-gradient(-180deg, #f4f3f4 0%, #d6d3D6 100%);');
 }
 
 
-.l-window--new-issue {
-  width: 445px
-}
+.l-window--new-issue { width: 445px }
 
 .l-window__inner {
   @include position( absolute, 0 0 0 0 );
