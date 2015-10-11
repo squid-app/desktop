@@ -9,6 +9,7 @@ var buildFolder   = './build/'
   , buffer        = require('vinyl-buffer')
   , browserify    = require('browserify')
   , reactify      = require('reactify')
+  , uglify        = require('gulp-uglify')
   , replace       = require('gulp-replace-task')
   , rename        = require('gulp-rename')
   , sequence      = require('run-sequence')
@@ -138,14 +139,13 @@ gulp.task('build:sass', function()
         includePaths: require('node-bourbon').includePaths
       , errLogToConsole: true
     }) )
+    .pipe( autoprefixer(
+    {
+        browsers: ['last 2 versions']
+      , cascade: false
+    }) )
     .pipe( sourcemaps.write() )
     .pipe( gulp.dest( assetsFolder + 'css' ) )
-
-    // .pipe( autoprefixer(
-    // {
-    //     browsers: ['last 2 versions']
-    //   , cascade: false
-    // }) )
 })
 
 gulp.task('build:move', function()
@@ -181,12 +181,11 @@ gulp.task('build:browserify', function ()
           .on( 'error', gutil.log )
           .pipe( source('squid.js') )
           .pipe( buffer() )
-          .pipe( gulp.dest( buildFolder ) )
-          .pipe( shell( './node_modules/nw/nwjs/nwjc ./build/squid.js ./build/squid.bin') )
-
-          //
-          // .pipe( sourcemaps.init( { loadMaps: true } ) )
-          // .pipe( sourcemaps.write('./') )
+          .pipe( uglify() )
+          .pipe( sourcemaps.init( { loadMaps: true } ) )
+          .pipe( sourcemaps.write('./') )
+          .pipe( gulp.dest( assetsFolder + 'js' ) )
+          // .pipe( shell( './node_modules/nw/nwjs/nwjc ./build/squid.js ./build/squid.bin') )
 })
 
 
@@ -195,6 +194,11 @@ gulp.task('build:post', function ()
   return del( [
       './build/squid.js'
   ] )
+})
+
+gulp.task('build:separator', function ()
+{
+  console.log('*****************')
 })
 
 
@@ -247,13 +251,14 @@ gulp.task('init', function()
 gulp.task('watch', function()
 {
   gulp.watch( [
-      './src/scss/**'
+      './src/scss/**/*'
     , './src/js/**/*'
     , './src/html/*'
     , './config/*'
     , './github.json'
   ], [
-      'build:package'
+      'build:separator'
+    , 'build:package'
     , 'build:config'
     , 'build:move'
     , 'build:sass'
