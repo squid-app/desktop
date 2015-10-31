@@ -60,7 +60,7 @@
   },
   "scripts": {
     "start": "nw ./build",
-    "dev": "gulp auto-reload --task init",
+    "dev": "gulp --task init",
     "build": "gulp build"
   }
 }
