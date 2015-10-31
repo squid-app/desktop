@@ -52,7 +52,7 @@
 
   &:before {
     border-radius: 19px 19px 0 0;
-    border: 1px solid $color-icon;
+    border: 1px solid #cbcbcb;
     height: 5px;
     left: 50%;
     margin-left: -2px;
@@ -62,7 +62,7 @@
   }
 
   &:after {
-    background: $color-icon;
+    background: #cbcbcb;
     border-radius: 1px;
     height: 4px;
     margin-top: 4px;

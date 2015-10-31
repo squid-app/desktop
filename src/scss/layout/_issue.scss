@@ -24,6 +24,8 @@
   @include position( absolute, 0 0 0 0);
   background: #fff;
   box-shadow: -2px 0px 3px 0px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
   margin-left: 8px;
   min-height: 100%;
   overflow-y: auto;
@@ -31,9 +33,13 @@
   transition: transform 400ms $ease;
 }
 
-.l-issue__data {
+.l-issue__header {
   border-bottom: 1px solid $color-border-issue;
   padding: 12px
+}
+
+.l-issue__title {
+  margin-top: 10px;
 }
 
 // Issue labels
@@ -43,15 +49,20 @@
   margin: 20px 0 10px;
 
   li {
-    border-radius: $border-radius-small;
-    color: #fff;
+    background: $color-label-bkgd;
+    border-radius: $border-radius-base;
+    color: $color-text;
     display: inline-block;
     height: 20px;
     line-height: 20px;
     margin-bottom: 10px;
-    margin-left: 6px;
-    padding: 0 8px;
-    text-transform: uppercase
+    margin-left: 4px;
+    padding: 0 4px;
+
+    &.l-issue__labels--trigger {
+      background: none;
+      color: $color-label-active;
+    }
   }
 }
 
@@ -59,6 +70,10 @@
 // -----------------
 
 .l-issue__tabs {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
   & [role='tablist'] {
     border-bottom: 1px solid $color-border-issue;
     height: 45px;
@@ -96,7 +111,7 @@
 
   & [selected] {
     &:after {
-      background: #31d4ff;
+      background: $color-label-active;
       bottom: 0;
       content: '';
       display: block;
@@ -106,12 +121,22 @@
       width: 100%;
     }
   }
+
+  & [role='tabpanel'] {
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
 }
 
 // Comments
 // -----------------
 
-.l-issue__comments { padding: 30px 15px }
+.l-issue__comments {
+  flex-grow: 1;
+  padding: 30px 15px
+}
 
 .l-issue__comment + .l-issue__comment { margin-top: 30px }
 
@@ -175,6 +200,7 @@
 
 .l-issue__add-comment {
   display: flex;
+  flex-direction: column;
   padding: 0 10px 5px;
 
   .c-avatar {
@@ -192,6 +218,12 @@
     resize: none;
     outline: none;
   }
+}
+
+.l-issue__add-comment__action {
+  padding-bottom: 30px;
+  padding-top: 10px;
+  text-align: right;
 }
 
 .l-issue__add-comment__attach {

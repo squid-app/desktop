@@ -92,11 +92,8 @@ $chromeFooter: unquote('linear-gradient(-180deg, #f4f3f4 0%, #d6d3D6 100%);');
     content: '';
     display: block;
     height: 100%;
-    opacity: 0;
-    transition: all 2s linear;
+    opacity: 1;
   }
-
-  &.active:after { opacity: 1 }
 }
 
 .l-chrome__content {
@@ -104,6 +101,7 @@ $chromeFooter: unquote('linear-gradient(-180deg, #f4f3f4 0%, #d6d3D6 100%);');
   align-items: center;
   justify-content: space-between;
   position: relative;
+  text-align: center;
   top: 0;
   transition: top 300ms $ease 150ms;
   width: 100%;

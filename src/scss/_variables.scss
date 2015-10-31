@@ -37,6 +37,7 @@ $color-text:             #828a95;
 
 $color-label:            #4a4a4a;
 $color-label-bkgd:       #ecf0f5;
+$color-label-active:     #51bef8;
 
 $color-highlight:        #ecfbff;
 $color-highlight-bkgd:   #c7eaf3;
@@ -46,6 +47,8 @@ $color-highlight-text:   #1a4f6c;
 $color-border:           #c1c1c1;
 $color-border-light:     #f1f1f1;
 $color-border-issue:     #e6e6e6;
+
+$color-bkgd:             #fbfbfb;
 
 $color-icon:             #71797f;
 
@@ -79,3 +82,8 @@ $font-size-giant:         24px;
 $img-path: '../img/';
 $font-path: '../fonts/';
 
+//== Variables
+//
+
+$homescreen-height: 187px;
+$homescreen-steps: 3;

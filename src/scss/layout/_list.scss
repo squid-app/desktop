@@ -1,23 +1,123 @@
 
 .l-list,
-.l-state {
+.l-homescreen {
   @include position( absolute, $chrome-min-height 0 $chrome-min-height 0);
   background: #fff;
 }
 
-.l-state {
+//== Homescreen
+//
+//## login form and loading steps
+
+.l-homescreen {
   z-index: ($z-list - 100)
 }
 
-.l-state__msg {
+.l-homescreen__header {
+  border-bottom: 1px solid $color-border-light;
+  height: 125px;
+
+  div {
+    line-height: 20px;
+    text-align: center
+  }
+
+  img { margin-bottom: 10px }
+}
+
+.l-homescreen__footer {
+  background: #fff;
+  height: $homescreen-height;
+  overflow: hidden;
+  transition: background 400ms $ease;
+
+  &.step-form {
+    background: $color-bkgd;
+
+    .l-homescreen__footer__wrapper { transform: translateY(0) }
+  }
+
+  &.step-login {
+    .l-homescreen__footer__wrapper { transform: translateY( -$homescreen-height ) }
+  }
+
+  &.step-fetch {
+    .l-homescreen__footer__wrapper { transform: translateY( -( $homescreen-height * 2 ) ) }
+  }
+}
+
+.l-homescreen__footer__wrapper {
+  height: ( $homescreen-height * $homescreen-steps );
+  transition: transform 400ms $ease;
+}
+
+.l-homescreen__step {
+  height: $homescreen-height
+}
+
+.l-homescreen__step__msg {
   line-height: 15px;
   text-align: center
 }
 
-.l-state__title {}
-.l-state__txt {}
+.l-homescreen__step__title {}
+.l-homescreen__step__txt {}
 
-.l-list{
+.l-loginform {
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    width: 235px;
+  }
+}
+
+.l-loginform__input {
+  height: 35px;
+  position: relative;
+
+  input {
+    @include placeholder { color: #cbcbcb }
+    background: none;
+    border: none;
+    color: $color-title;
+    font-family: $font-family-text-regular;
+    font-size: $font-size-extra;
+    height: 35px;
+    width: 100%;
+  }
+
+  span {
+    background: $color-border-light;
+    display: block;
+    height: 2px;
+
+    &:before {
+      background: #43bafa;
+      content: '';
+      display: block;
+      height: 100%;
+      transition: all 250ms $ease;
+      width: 0;
+    }
+  }
+
+  input:focus,
+  input:valid {
+    & + span:before { width: 100% }
+  }
+}
+
+.l-loginform__input + .l-loginform__input {
+  margin-bottom: 25px;
+  margin-top: 10px;
+}
+
+//== List
+//
+//## Repositories and Issues list
+
+.l-list {
   @include windowTransition();
   overflow-y: auto;
   z-index: $z-list;

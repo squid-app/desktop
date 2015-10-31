@@ -1,10 +1,12 @@
 @mixin windowTransition(){
   opacity: 0;
+  pointer-events: none;
   transform: scale(.9);
   transition: all 400ms $ease;
 
   &.active {
     opacity: 1;
+    pointer-events: auto;
     transform: scale(1)
   }
 }
