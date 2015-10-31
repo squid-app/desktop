@@ -14,6 +14,9 @@ var MainWindow = function()
   console.log('+++++++')
   console.log( Desktop._UID )
   console.log( screen.height )
+  console.log( Desktop.isHires() )
+ // Setup icon tray
+  this._TRAY = new ( require('../utils/tray') )( Desktop.isHires() )
 
 
   // set user token

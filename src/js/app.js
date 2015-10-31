@@ -74,9 +74,6 @@ var Squid = function()
     // , envName: 'dev'
   })
 
-  // Setup icon tray
-  this._TRAY = new ( require('./utils/tray') )( this._HIRES )
-
   // display DevTools on dev env
   // -------------------------------
 
@@ -214,6 +211,16 @@ Squid.prototype.windows = function( _filename )
   }
 
   return new ( w )()
+}
+
+// Return test for retina
+//
+//      @return  {bool}
+//
+
+Squid.prototype.isHires = function()
+{
+  return this._HIRES
 }
 
 // Expose class instance
