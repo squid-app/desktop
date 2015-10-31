@@ -6,40 +6,74 @@
   <link rel="stylesheet" href="assets/css/squid.css">
 </head>
 <body style="background:red">
-  <div class="l-window l-window--arrow l-window--arrow-close active" _style="height: 680px;">
-    <div class="l-window__inner">
-      <div class="l-chrome l-chrome--header">
-        <div class="l-chrome__content">
-          <div class="l-search">
-            <i class="i-search"></i>
-          </div><!-- /.l-search -->
-          <h3 class="l-section-selector">
-            <span class="ff-label fs-large co-label">window with arrow</span>
-            <i class="i-caret"></i>
-          </h3><!-- /.l-section-selector -->
-          <div class="l-back">
-            <i class="i-close"></i>
-          </div>
-        </div><!-- /.l-chrome__content -->
-      </div><!-- /.l-chrome--header -->
-      <div class="l-chrome l-chrome--footer active">
-        <div class="l-chrome__content">
-          <i class="i-gears"></i>
-          <div class="c-btn-action u-va">
-            <i class="i-add"></i>
-          </div>
+<div class="l-window l-window--arrow active" _style="height: 680px;">
+  <div class="l-window__inner">
+    <div class="l-chrome l-chrome--header">
+      <div class="l-chrome__content">
+        <div class="l-search u-dn">
+          <i class="i-search"></i>
+        </div><!-- /.l-search -->
+        <h3 class="l-section-selector">
+          <span class="ff-label fs-large co-label">Ahoy!</span>
+          <i class="i-caret u-dn"></i>
+        </h3><!-- /.l-section-selector -->
+        <div class="l-back u-dn">
+          <i class="i-close"></i>
         </div>
-      </div><!-- /.l-chrome--footer -->
-      <div class="l-state u-va">
-        <div class="l-state__msg">
-          <h3 class="l-state__title ff-actor fs-small co-text u-uppercase">Fetching data<span>...</span></h3>
-          <p class="l-state__txt ff-regular">loading your repositories</p>
+      </div><!-- /.l-chrome__content -->
+    </div><!-- /.l-chrome--header -->
+    <div class="l-chrome l-chrome--footer">
+      <div class="l-chrome__content">
+        <i class="i-gears"></i>
+        <div class="c-btn-action u-va">
+          <i class="i-add"></i>
         </div>
       </div>
-      <div class="l-list active-"></div><!-- /.l-list -->
-      <div class="l-issue selected- displayed-"></div><!-- /.l-issue -->
-    </div><!-- /.l-window__inner -->
-  </div><!-- /.l-window -->
+    </div><!-- /.l-chrome--footer -->
+    <div class="l-homescreen">
+      <div class="l-homescreen__header u-va">
+        <div class="fs-base">
+          <img src="assets/img/icon-homescreen.svg">
+          <h3 class="ff-label co-title">Log in with your O.G. Github credentials.</h3>
+          <i class="ff-regular co-text u-italic">We don’t store them, so chill.</i>
+        </div>
+      </div><!-- /.l-homescreen__header -->
+      <div class="l-homescreen__footer step-form">
+        <div class="l-homescreen__footer__wrapper">
+          <div class="l-homescreen__step l-loginform u-va">
+            <div>
+              <div class="l-loginform__input">
+                <input type="text" placeholder="Your github account" id="login-email" autocomplete="off" spellcheck="false" required>
+                <span></span>
+              </div>
+              <div class="l-loginform__input">
+                <input type="password" placeholder="your password" id="login-password" autocomplete="off" required>
+                <span></span>
+              </div>
+              <div class="u-tc">
+                <button class="c-btn c-btn--submit c-btn--large">Witness me</button>
+              </div>
+            </div>
+          </div><!-- /.l-homescreen__step -->
+          <div class="l-homescreen__step u-va">
+            <div class="l-homescreen__step__msg">
+              <h3 class="l-homescreen__step__title ff-actor fs-small co-text u-uppercase">Login in<span>...</span></h3>
+              <p class="l-homescreen__step__txt ff-regular">dealing with Github Oauth gateway</p>
+            </div>
+          </div><!-- /.l-homescreen__step -->
+          <div class="l-homescreen__step u-va">
+            <div class="l-homescreen__step__msg">
+              <h3 class="l-homescreen__step__title ff-actor fs-small co-text u-uppercase">Fetching data<span>...</span></h3>
+              <p class="l-homescreen__step__txt ff-regular">loading your repositories</p>
+            </div>
+          </div><!-- /.l-homescreen__step -->
+        </div><!-- /.l-homescreen__footer__wrapper -->
+      </div><!-- /.l-homescreen__footer -->
+    </div><!-- /.l-homescreen -->
+    <div class="l-list"></div><!-- /.l-list -->
+    <div class="l-issue"></div><!-- /.l-issue -->
+  </div><!-- /.l-window__inner -->
+</div><!-- /.l-window -->
   <script src="assets/js/squid.js"></script>
   <script>
   // Load App
