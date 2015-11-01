@@ -33,20 +33,6 @@ $chromeFooter: unquote('linear-gradient(-180deg, #f4f3f4 0%, #d6d3D6 100%);');
   }
 }
 
-.l-window--arrow-close {
-  .l-chrome--header {
-    height: 55%;
-
-    .l-chrome__content { top: -100% }
-  }
-  .l-chrome--footer {
-    height: calc( 45% + 1px );
-
-    .l-chrome__content { top: 100% }
-  }
-}
-
-
 .l-window--new-issue { width: 445px }
 
 .l-window__inner {
