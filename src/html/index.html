@@ -5,8 +5,8 @@
   <title>Squid</title>
   <link rel="stylesheet" href="assets/css/squid.css">
 </head>
-<body style="background:red">
-<div class="l-window l-window--arrow active" _style="height: 680px;">
+<body style="background-color:rgba(0,0,0,0); overflow:hidden">
+<div class="l-window l-window--arrow active" style="height: 400px;">
   <div class="l-window__inner">
     <div class="l-chrome l-chrome--header">
       <div class="l-chrome__content">
@@ -94,6 +94,13 @@
     // Squid.core().storage().set('test', 0)
     // console.log(Squid.core().storage().get('test', 'ko'))
   }
+
+  // Get App focus status
+  var nwWin = global.window.nwDispatcher.requireNwGui().Window.get();
+
+  nwWin.on("blur",  function(){ console.log("nw-blur") });
+  nwWin.on("focus", function(){ console.log("nw-focus") });
+
   </script>
 </body>
 </html>

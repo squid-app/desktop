@@ -29,12 +29,6 @@ var buildFolder   = './build/'
 if( argv.prod === true )
   environment = 'prod'
 
-if( environment !== 'prod' )
-{
-  var envConfig = require( './config/' + environment )
-  config = require('lodash').merge( config, envConfig )
-}
-
 if( argv.noModules )
   noModules = argv.noModules
 
@@ -61,6 +55,21 @@ function string_src(filename, string)
 
 // Tasks
 // ---------------
+
+gulp.task('set:config', function()
+{
+  console.log( 'env config', environment )
+  if( environment !== 'prod' )
+  {
+    var path = './config/' + environment
+
+    delete require.cache[ path ]
+
+    var envConfig = require( path )
+
+    config = require('lodash').merge( config, envConfig )
+  }
+})
 
 gulp.task('build:clean', function()
 {
@@ -99,6 +108,7 @@ gulp.task('build:package', function ()
     , 'main':            'index.html'
     , 'single-instance': true
     , 'window':          config.window
+    , 'chromium-args':   '--disable-gpu --force-cpu-draw'
     , 'dependencies':    pkg.dependencies
   }, null, 2)
 
@@ -248,7 +258,8 @@ gulp.task('default', function()
 gulp.task('init', function()
 {
   sequence(
-      'build:clean'
+      'set:config'
+    , 'build:clean'
     , 'build:package'
     , 'build:config'
     , 'build:modules'
@@ -268,6 +279,7 @@ gulp.task('watch', function()
     , './github.json'
   ], [
       'build:separator'
+    , 'set:config'
     , 'build:package'
     , 'build:config'
     , 'build:move'
@@ -282,6 +294,7 @@ gulp.task('build', function()
   sequence(
       'release:clean'
     , 'build:clean'
+    , 'set:config'
     , 'build:version'
     , 'build:package'
     , 'build:config'
